@@ -1,79 +1,132 @@
 package com.fitwise.fitness_management_system.User;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class User {
+    public enum Gender {
+        Male,
+        Female,
+        Unspecified
+
+    }
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int u_id;
-    private String u_name;
-    private String u_email;
-    private String u_password;  
-    private long u_phone;
-    private int u_age;
-    private float u_height;
-    private float u_weight;
-    private Gender u_gender;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "userId")
+    private Integer userId;
 
-    
-    public void set_id(int id){
-        this.u_id = id;
-    }
-    public void set_email(String mail){
-        this.u_email = mail;
-    }
-    public void set_name(String name){
-        this.u_name = name;
-    }
-    public void set_phone(long phno){
-        this.u_phone = phno;
-    }
-    public void set_password(String password){
-        this.u_password = password;
-    }
-    public void set_height(float height){
-        this.u_height = height;
-    }
-    public void set_weight(float weight){
-        this.u_weight = weight;
-    }
-    public void set_age(int age){
-        this.u_age = age;
-    }
-    public void set_gender(Gender gender){
-        this.u_gender = gender;
+    @Column(nullable = false)
+    private String userName;
+
+    @Column(nullable = false, unique = true)
+    private String userEmail;
+
+    @Column(nullable = false)
+    private String userPassword;
+
+    @Column(nullable = false)
+    private long userPhone;
+
+    @Column(nullable = false)
+    private int userAge;
+
+    @Column(nullable = false)
+    private float userHeight;
+
+    @Column(nullable = false)
+    private float userWeight;
+
+    @Enumerated(EnumType.STRING)
+    private Gender userGender;
+
+    // Constructors
+    public User() {
     }
 
+    public User(String userName, String userEmail, String userPassword, long userPhone, int userAge, float userHeight, float userWeight, Gender userGender) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.userPhone = userPhone;
+        this.userAge = userAge;
+        this.userHeight = userHeight;
+        this.userWeight = userWeight;
+        this.userGender = userGender;
+    }
 
-    public int get_id(){
-        return u_id;
+    // Getters and setters
+    public Integer getUserId() {
+        return userId;
     }
-    public String get_email(){
-        return u_email;
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-    public String get_name(){
-        return u_name;
+
+    public String getUserName() {
+        return userName;
     }
-    public long get_phone(){
-        return u_phone;
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
-    public String get_password(){
-        return u_password;
+
+    public String getUserEmail() {
+        return userEmail;
     }
-    public float get_height(){
-        return u_height;
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
-    public float get_weight(){
-        return u_weight;
+
+    public String getUserPassword() {
+        return userPassword;
     }
-    public int get_age(){
-        return u_age;
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
-    public Gender get_gender(){
-        return u_gender;
+
+    public long getUserPhone() {
+        return userPhone;
     }
+
+    public void setUserPhone(long userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public int getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(int userAge) {
+        this.userAge = userAge;
+    }
+
+    public float getUserHeight() {
+        return userHeight;
+    }
+
+    public void setUserHeight(float userHeight) {
+        this.userHeight = userHeight;
+    }
+
+    public float getUserWeight() {
+        return userWeight;
+    }
+
+    public void setUserWeight(float userWeight) {
+        this.userWeight = userWeight;
+    }
+
+    public Gender getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(Gender userGender) {
+        this.userGender = userGender;
+    }
+
 }
