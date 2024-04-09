@@ -1,0 +1,190 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow-y: scroll;
+            height: 130vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #9DCEFF, #acffe7);
+        }
+
+        #content {
+            max-width: 700px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        #content .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        #content .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #9DCEFF, #acffe7);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button {
+            height: 45px;
+            width: calc(50% - 5px);
+        }
+
+        .button a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #022b3a, #1f7a8c);
+            text-decoration: none;
+        }
+
+        .button a:hover {
+            background: linear-gradient(-135deg, #9DCEFF, #acffe7);
+        }
+        .button1 {
+          flex: 0 0 100%; /* button1 takes full width */
+          height: 45px; /* Set the height to match other buttons */
+          margin-bottom: 20px; /* Add margin between buttons */
+        }
+
+        .button1 a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #022b3a, #1f7a8c);
+            text-decoration: none;
+        }
+
+        .button1 a:hover {
+            background: linear-gradient(-135deg, #9DCEFF, #acffe7);
+        }
+        .button2 {
+            display: flex;
+            justify-content: center; /* Align button horizontally */
+            align-items: flex-end; /* Align button to the bottom */
+            height: 45px;
+        }
+
+        .button2 a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 30%;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #022b3a, #1f7a8c);
+            text-decoration: none;
+        }
+
+        .button2 a:hover {
+            background: linear-gradient(-135deg, #9DCEFF, #acffe7);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div class="title">Welcome!</div>
+        <div class="button-container">
+            <div class="button">
+                <a href="/home/{{type}}/{{name}}/requestAppointment/status/valid">View Fitness Plan</a>
+            </div>
+            <div class="button">
+                <a href="/home/{{type}}/{{name}}/appointmentHistory">View Diet Plan</a>
+            </div>
+        </div>
+        <div class="button-container">
+            <div class="button1">
+                <a href="/logout/patient">View Profile</a>
+            </div>
+        </div>
+        <div class="button2">
+            <a href="/home/{{type}}/{{name}}/appointmentHistory">Logout</a>
+        </div>
+    </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <link rel="stylesheet" th:href="@{/style/user_home.css}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <div id="content">
+        <div class="title">Welcome!</div>
+        <div class="button-container">
+            <div class="button">
+                <a th:href="@{/home/{type}/{name}/requestAppointment/status/valid(type=${type}, name=${name})}">View Fitness Plan</a>
+            </div>
+            <div class="button">
+                <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">View Diet Plan</a>
+            </div>
+        </div>
+        <div class="button-container">
+            <div class="button1">
+                <a th:href="@{/user/updateUserInfo}">View Profile</a>
+            </div>
+        </div>
+        <div class="button2">
+            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

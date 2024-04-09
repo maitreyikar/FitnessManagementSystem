@@ -42,6 +42,35 @@ public class UserController {
       return "user_login";
   }
 
+  @GetMapping("/updateUserInfo")
+  public String showUpdateUserInfoForm(Model model) {
+      model.addAttribute("user", new User());
+      return "updateUserInfo";
+  }
+  @GetMapping("/home")
+  public String userHomePage(Model model) {
+      return "user_home";
+  }
+
+  @PostMapping("/updateUser")
+  public String updateUser(@ModelAttribute User user) {
+      // Retrieve the existing user from the database using userId
+      User existingUser = userRepository.findById(user.getUserId()).orElse(null);
+      if (existingUser != null) {
+          // Update the fields that the user has provided
+          existingUser.setUserName(user.getUserName());
+          existingUser.setUserEmail(user.getUserEmail());
+          existingUser.setUserPhone(user.getUserPhone());
+          existingUser.setUserAge(user.getUserAge());
+          existingUser.setUserHeight(user.getUserHeight());
+          existingUser.setUserWeight(user.getUserWeight());
+          existingUser.setUserGender(user.getUserGender());
+          // Save the updated user information
+          userRepository.save(existingUser);
+      }
+      return "redirect:/user/updateUserInfo";
+  }
+
   
   
 }
