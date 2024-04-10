@@ -3,7 +3,7 @@
 <html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title> Responsive Registration Form | CodingLab </title>
+    <title> Responsive Registration Form </title>
     <link rel="stylesheet" th:href="@{/style/user_login.css}">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
@@ -13,18 +13,18 @@
   </div>
   <div class="container">
     <div class="title">Login</div>
+    <p th:text="${message}"></p>
     <div class="content">
-        
       <form action="#" th:action="@{/user/login}" method = "POST">
         <div class="user-details">
           
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
+            <input type="text" th:name="email" placeholder="Enter your email" required>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="password" placeholder="Enter your Password" required>
+            <input type="password" th:name="password" placeholder="Enter your Password" required>
           </div>
           
         </div>

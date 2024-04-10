@@ -1,10 +1,10 @@
-package com.fitwise.fitness_management_system;
+package com.fitwise.fitnessmanagementsystem;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FitnessManagementSystemApplicationTests {
+class FitnessmanagementsystemApplicationTests {
 
 	@Test
 	void contextLoads() {

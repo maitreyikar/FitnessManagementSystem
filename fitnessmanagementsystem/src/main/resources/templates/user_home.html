@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <link rel="stylesheet" th:href="@{/style/user_home.css}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <div id="content">
+        <div class="title">Welcome!</div>
+        <div class="button-container">
+            <div class="button">
+                <a th:href="@{/home/{type}/{name}/requestAppointment/status/valid(type=${type}, name=${name})}">View Fitness Plan</a>
+            </div>
+            <div class="button">
+                <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">View Diet Plan</a>
+            </div>
+        </div>
+        <div class="button-container">
+            <div class="button1">
+                <a th:href="@{/user/updateUserInfo}">View Profile</a>
+            </div>
+        </div>
+        <div class="button2">
+            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
