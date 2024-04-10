@@ -1,3 +1,5 @@
+
+
 package com.fitwise.fitness_management_system.User;
 
 import jakarta.persistence.*;
@@ -130,3 +132,9 @@ public class User {
     }
 
 }
+
+
+
+
+
+
