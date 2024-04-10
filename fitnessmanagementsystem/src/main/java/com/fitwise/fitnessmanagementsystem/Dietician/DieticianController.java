@@ -32,8 +32,7 @@ public class DieticianController {
     @GetMapping(path = "/login")
     public String getLoginPage(Model model) {
         model.addAttribute("message", "");
-        Dietician dietician1 = new Dietician(1, "Nikita", "nikita@mabel.com", "password123", 1234567890L, "Oncology");
-        dieticianRepository.save(dietician1);
+
         return "dietician_login";
     }
     
