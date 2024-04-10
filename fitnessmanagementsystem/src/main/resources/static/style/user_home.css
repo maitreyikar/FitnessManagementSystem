@@ -1,3 +1,5 @@
+/* user_home.css */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 * {
@@ -8,13 +10,65 @@
 }
 
 body {
-    /* overflow-y: scroll; */
-    height: 100%;
+    overflow-y: scroll;
+    height: 130vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 200px;
+    padding: 10px;
     background: linear-gradient(135deg, #9DCEFF, #acffe7);
+}
+
+.banner {
+    position: fixed; /* Fixed position to keep it at the top */
+    top: 0;
+    background-color: #022b3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 20px 40px;
+    z-index: 1;
+}
+
+.site_name {
+    color: #fff;
+    font-size: 4ch;
+}
+
+.button-container {
+    display: flex;
+    align-items: center; /* Adjusted alignment */
+}
+
+.button1,
+.button2 {
+    height: 45px;
+    margin-left: 10px;
+}
+
+.button1 a,
+.button2 a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #022b3a, #1f7a8c);
+    text-decoration: none;
+}
+
+.button1 a:hover,
+.button2 a:hover {
+    background: linear-gradient(-135deg, #9dceff, #acffe7);
 }
 
 #content {
@@ -24,6 +78,7 @@ body {
     padding: 25px 30px;
     border-radius: 5px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 150px; /* Adjusted margin to accommodate fixed banner */
 }
 
 #content .title {
@@ -72,58 +127,5 @@ body {
 }
 
 .button a:hover {
-    background: linear-gradient(-135deg, #9DCEFF, #acffe7);
-}
-.button1 {
-  flex: 0 0 100%;
-  height: 45px;
-  margin-bottom: 20px;
-}
-
-.button1 a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #022b3a, #1f7a8c);
-    text-decoration: none;
-}
-
-.button1 a:hover {
-    background: linear-gradient(-135deg, #9DCEFF, #acffe7);
-}
-.button2 {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 45px;
-}
-
-.button2 a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 30%;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #022b3a, #1f7a8c);
-    text-decoration: none;
-}
-
-.button2 a:hover {
     background: linear-gradient(-135deg, #9DCEFF, #acffe7);
 }

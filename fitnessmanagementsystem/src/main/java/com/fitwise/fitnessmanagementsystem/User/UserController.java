@@ -98,33 +98,56 @@ public class UserController {
             return "redirect:/user/login";
         }
         else{
-            return "home";
+            return "user_home";
         }
     }
 
-    // @GetMapping("/updateUserInfo")
-    // public String showUpdateUserInfoForm(Model model) {
-    //     model.addAttribute("user", new User());
-    //     return "updateUserInfo";
-    // }
+    @GetMapping("/updateUserInfo")
+    public String showUpdateUserInfoForm(Model model, HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+    
+        User user = new User();
+        user.setUserName(currentUser.getUserName());
+        user.setUserEmail(currentUser.getUserEmail());
+        user.setUserPhone(currentUser.getUserPhone());
+        user.setUserAge(currentUser.getUserAge());
+        user.setUserHeight(currentUser.getUserHeight());
+        user.setUserWeight(currentUser.getUserWeight());
+        user.setUserGender(currentUser.getUserGender());
+    
+        model.addAttribute("user", user);
+        return "updateUserInfo";
+    }
+    
 
-    // @PostMapping("/updateUser")
-    // public String updateUser(@ModelAttribute User user) {
-    //     // Retrieve the existing user from the database using userId
-    //     User existingUser = userRepository.findById(user.getUserId()).orElse(null);
-    //     if (existingUser != null) {
-    //         // Update the fields that the user has provided
-    //         existingUser.setUserName(user.getUserName());
-    //         existingUser.setUserEmail(user.getUserEmail());
-    //         existingUser.setUserPhone(user.getUserPhone());
-    //         existingUser.setUserAge(user.getUserAge());
-    //         existingUser.setUserHeight(user.getUserHeight());
-    //         existingUser.setUserWeight(user.getUserWeight());
-    //         existingUser.setUserGender(user.getUserGender());
-    //         // Save the updated user information
-    //         userRepository.save(existingUser);
-    //     }
-    //     return "redirect:/user/updateUserInfo";
-    // }
+    @PostMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User updatedUser, Model model, HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+        User existingUser = userRepository.findById(currentUser.getUserId()).orElse(null);
+        if (existingUser != null) {
+            // Update user information with the values from the updatedUser object
+            existingUser.setUserName(updatedUser.getUserName());
+            existingUser.setUserEmail(updatedUser.getUserEmail());
+            existingUser.setUserPhone(updatedUser.getUserPhone());
+            existingUser.setUserAge(updatedUser.getUserAge());
+            existingUser.setUserHeight(updatedUser.getUserHeight());
+            existingUser.setUserWeight(updatedUser.getUserWeight());
+            existingUser.setUserGender(updatedUser.getUserGender());
+            userRepository.save(existingUser);
+            User updatedCurrentUser = userRepository.findById(currentUser.getUserId()).orElse(null);
+            if (updatedCurrentUser != null) {
+                request.getSession().setAttribute("loggedInUser", updatedCurrentUser);
+            }
+        }
+        return "redirect:/user/home";
+    }
+    
+    
 
 }
