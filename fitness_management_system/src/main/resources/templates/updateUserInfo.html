@@ -2,13 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Responsive Registration Form | CodingLab</title>
+    <title>Responsive Registration Form</title>
     <link th:href="@{/style/user_registration.css}" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div class="banner" style="background-color: #022b3a;">
-    <h1 class="site_name" style="color: #fff;">Update User Information</h1>
+<div class="banner">
+    <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/user/home}">Home</a>
+        </div>
+        <div class="button2">
+            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="title" style="color: #022b3a;">Update User Info</div>
