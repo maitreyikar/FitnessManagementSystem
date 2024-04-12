@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Responsive Registration Form</title>
+        <link th:href="@{/style/user_registration.css}" rel="stylesheet"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="banner">
+            <div class="site_name">FitWise</div>
+        </div>
+        <div class="container">
+            <div class="title">Registration</div>
+            <p th:text="${message}"></p>
+            <div class="content">
+                <!-- Form submission -->
+                <form id="myForm" action="#" th:action="@{/user/add}" th:object="${user}" method="POST">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Name</span>
+                            <input id ="name" th:field="*{userName}" type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input id ="email" th:field="*{userEmail}" type="text" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Password</span>
+                            <input id ="password" th:field="*{userPassword}" type="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Confirm Password</span>
+                            <input id ="confirmPassword" type="password" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input id ="phone" th:field="*{userPhone}" type="number" placeholder="Enter your number" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Age</span>
+                            <input id ="age" th:field="*{userAge}" type="number" placeholder="Enter your age" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Height</span>
+                            <input id ="height" th:field="*{userHeight}" type="number" placeholder="Enter your height" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Weight</span>
+                            <input id ="weight" th:field="*{userWeight}" type="number" placeholder="Enter your weight" required>
+                        </div>
+                    </div>
+                    <div class="gender-details">
+                        <input type="radio" th:field="*{userGender}" id="dot-1" value="Male">
+                        <input type="radio" th:field="*{userGender}" id="dot-2" value="Female">
+                        <input type="radio" th:field="*{userGender}" id="dot-3" value="Unspecified">
+                        <span class="gender-title">Gender</span>
+                        <div class="category">
+                            <label for="dot-1">
+                                <span class="dot one"></span>
+                                <span class="gender">Male</span>
+                            </label>
+                            <label for="dot-2">
+                                <span class="dot two"></span>
+                                <span class="gender">Female</span>
+                            </label>
+                            <label for="dot-3">
+                                <span class="dot three"></span>
+                                <span class="gender">Prefer not to say</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Register">
+                    </div>
+                </form>
+
+                
+            </div>
+        </div>
+
+
+        <script>
+
+            function validateForm() {
+                var name = document.getElementById("name").value.trim();
+                var email = document.getElementById("email").value.trim();
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                var phone = document.getElementById("phone").value.trim();
+                var age = document.getElementById("age").value;
+                var height = document.getElementById("height").value;
+                var weight = document.getElementById("weight").value;
+
+                
+
+                if (!isValidEmail(email)) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                }
+
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    return false;
+                }
+
+                // Check password strength (at least 8 characters)
+                if (password.length < 8) {
+                    alert("Password must be at least 8 characters long.");
+                    return false;
+                }
+
+               if (!isValidPhone(phone)) {
+                    alert("Please enter a valid phone number.");
+                    return false;
+                }
+
+                if (isNaN(age) || age <= 0) {
+                    alert("Please enter a valid age.");
+                    return false;
+                }
+
+                if (isNaN(height) || height <= 0) {
+                    alert("Please enter a valid height.");
+                    return false;
+                }
+
+                if (isNaN(weight) || weight <= 0) {
+                    alert("Please enter a valid weight.");
+                    return false;
+                }
+
+                return true; // Submit the form if all validations pass
+            }
+
+            function isValidEmail(email) {
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            }
+
+            function isValidPhone(phone) {
+                var phonePattern = /^\d{10}$/;
+                return phonePattern.test(phone);
+            }
+
+            document.getElementById("myForm").onsubmit = validateForm;
+
+        </script>>
+    
+    </body>
+</html>
