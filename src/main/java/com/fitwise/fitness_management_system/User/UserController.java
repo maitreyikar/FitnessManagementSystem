@@ -180,7 +180,7 @@ public class UserController
         return "select_diet_plan"; 
     }
 
-    /*@PostMapping("/selectdietplan")
+    @PostMapping("/selectdietplan")
     public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
                                         HttpServletRequest request, HttpSession session)
     {  
@@ -214,22 +214,17 @@ public class UserController
     
     
 
-    }*/
+    }
 
 
-    @PostMapping("/selectdietplan")
+    /*@PostMapping("/selectdietplan")
     public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
                                      HttpServletRequest request, HttpSession session) {
     // ... existing code
-    User currentUser = (User) session.getAttribute("loggedInUser");
-    if (currentUser == null) 
-    {
-    return "redirect:/user/login";
-    }
     
     if (selectedDietPlanId != null) {
         // Access the logged-in user from the session
-       
+        User currentUser = (User) session.getAttribute("loggedInUser");
         if (currentUser != null) {
             // Update the user's selected plan details
             currentUser.setSelectedDietPlanId(selectedDietPlanId);
@@ -247,7 +242,7 @@ public class UserController
     }
     // ... handle cases where no plan is found or user is not logged in
     return "redirect:/selectdietplan?error=noPlan"; 
-}
+}*/
 
 
 }
