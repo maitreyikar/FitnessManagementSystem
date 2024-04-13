@@ -25,7 +25,13 @@
             <a th:href="@{/home/{type}/{name}/requestAppointment/status/valid(type=${type}, name=${name})}">Select Fitness Plan</a>
         </div>
         <div class="button">
-            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Select Diet Plan</a>
+            <a th:href="@{/user/selectdietplan}">Select Diet Plan</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/home/{type}/{name}/requestAppointment/status/valid(type=${type}, name=${name})}">View Fitness Plan</a>
+        </div>
+        <div class="button">
+            <a th:href="@{/dietplan/viewdietplans}">View Diet Plan</a>
         </div>
     </div>
 </div>

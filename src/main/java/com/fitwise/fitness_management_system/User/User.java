@@ -20,4 +20,8 @@ public class User {
     private Float userHeight;
     private Float userWeight;
     private Gender userGender;
+
+    private String selectedDietPlanId;
+    private String selectedDietPlanName;
+
 }

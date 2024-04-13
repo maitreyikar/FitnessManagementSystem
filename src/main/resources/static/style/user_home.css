@@ -101,9 +101,11 @@ body {
 .button-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
+    align-items: center;
 }
 
+  
 .button {
     height: 45px;
     width: calc(50% - 5px);
