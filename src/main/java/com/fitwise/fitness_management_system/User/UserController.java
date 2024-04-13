@@ -180,7 +180,7 @@ public class UserController
         return "select_diet_plan"; 
     }
 
-    @PostMapping("/selectdietplan")
+    /*@PostMapping("/selectdietplan")
     public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
                                         HttpServletRequest request, HttpSession session)
     {  
@@ -214,7 +214,41 @@ public class UserController
     
     
 
+    }*/
+
+
+    @PostMapping("/selectdietplan")
+    public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
+                                     HttpServletRequest request, HttpSession session) {
+    // ... existing code
+    User currentUser = (User) session.getAttribute("loggedInUser");
+    if (currentUser == null) 
+    {
+    return "redirect:/user/login";
     }
+    
+    if (selectedDietPlanId != null) {
+        // Access the logged-in user from the session
+       
+        if (currentUser != null) {
+            // Update the user's selected plan details
+            currentUser.setSelectedDietPlanId(selectedDietPlanId);
+            // ... (Optional) Find the selected plan details from the database (if needed)
+            List<DietPlan> selectedPlans = dietPlanRepository.findByplanId(selectedDietPlanId);
+            DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
+            if (selectedDietPlan != null) {
+                currentUser.setSelectedDietPlanName(selectedDietPlan.getPlanName());
+            }
+            // Save the updated user information
+            userRepository.save(currentUser);
+            // ... (Optional) Redirect to a success page
+            return "redirect:/success";
+        }
+    }
+    // ... handle cases where no plan is found or user is not logged in
+    return "redirect:/selectdietplan?error=noPlan"; 
+}
+
 
 }
 
