@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Plan</title>
+    <link th:href="@{/style/make_dietplan.css}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="banner">
+    <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/dietician/home}">Back</a>
+        </div>
+    </div>
+</div>
+<div class="container">  
+    <div class="title">Create Diet Plan</div>
+    <div class="content">  
+      <!-- Form submission -->
+        <form id="myForm" action="/dietplan/savedietplanner" th:action="@{/dietplan/savedietplanner}" th:object="${dietplan}" method="POST">          
+            <div class="dietplan-details">
+                <div class="input-box">
+                    <span class="details">Diet Plan Name</span>
+                    <input id="name" th:field="*{planName}" type="text" placeholder="Breakfast/Lunch/Dinner" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Diet Plan Type</span>
+                    <input id="type" th:field="*{planType}" type="text" placeholder="Diet Plan type" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Dietician Name</span>
+                    <input id="dieticianName" th:field="*{dieticianName}" type="text" placeholder="Enter your name" required>
+                </div>
+            
+
+              <div id="mealFields">
+                <div th:each="meal, mealStat : ${dietplan.mealSet}" class="input-box">
+                  <span class="details">Meal Name</span>
+                        <input th:field="*{mealSet[__${mealStat.index}__].mealName}" type="text" placeholder="Enter meal name">
+                        <span class="details">  Description</span>
+                        <input th:field="*{mealSet[__${mealStat.index}__].description}" type="text" placeholder="Description">
+                        <span class="details">No of meals</span>
+                        <input th:field="*{mealSet[__${mealStat.index}__].NoOfMeals}" type="number" placeholder="Enter no. of meals">
+                        <span class="details">Calorie goals</span>
+                        <input th:field="*{mealSet[__${mealStat.index}__].CalorieGoals}" type="number" placeholder="Enter calorie goals">
+                        
+                </div>
+              </div>
+
+              <div class="add-button">
+                  <button type="button" onclick="addMeal()">Add Meal</button>
+              </div>
+          
+              <div class="input-box">
+                  <span class="details">Total Calories</span>
+                  <input id="totalcalories" th:field="*{totalCalories}" type="number" placeholder="Enter total calories" required>
+              </div>                
+            </div>
+          
+            <div class="button">
+              <input type="submit" value="Make diet plan">
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<script>
+  var mealCounter = 0;
+  function addMeal() {
+    var mealFields = document.getElementById("mealFields");
+    var mealDiv = document.createElement("div");
+ 
+    mealDiv.innerHTML =  `
+            <div class="input-box">
+                <span class="details">Meal Name</span>
+                <input name="mealName" type="text" placeholder="Enter meal name">
+            </div>
+            <div class="input-box">
+                <span class="details">Description</span>
+                <input name="description" type="text" placeholder="Description">
+            </div>
+            <div class="input-box">
+                <span class="details">No of Meals</span>
+                <input name="noOfMeals" type="number" placeholder="Enter no. of meals">
+            </div>
+            <div class="input-box">
+                <span class="details">Calories</span>
+                <input name="calories" type="number" placeholder="Calorie Goals">
+            </div><br>
+        `;
+    mealFields.appendChild(mealDiv);
+    mealCounter++; 
+  }
+
+</script>
+</body>
+</html>

@@ -3,7 +3,10 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import  org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import com.fitwise.fitnessmanagementsystem.DietPlan.DietPlan;
 import com.fitwise.fitnessmanagementsystem.FitnessPlan.FitnessPlan;
+import com.fitwise.fitnessmanagementsystem.DietPlan.DietPlan;
 
 
 
@@ -24,7 +27,11 @@ public class User {
     private Float userWeight;
     private Gender userGender;
 
-    @DBRef
-    FitnessPlan planId;
+    // @DBRef
+    // DietPlan planId;
+    // DietPlan planName;
+    private String planId;
+    private String planName;
+
 
 }

@@ -1,0 +1,107 @@
+body {
+  overflow-y: scroll;
+  height: 130vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #9DCEFF, #acffe7);
+}
+
+.banner {
+  position: fixed;
+  top: 0;
+  background-color: #022b3a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 20px 40px;
+  z-index: 1;
+}
+
+.site_name {
+  color: #fff;
+  font-size: 4ch;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.button1 a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #022b3a, #1f7a8c);
+  text-decoration: none;
+}
+
+.button1 a:hover {
+  background: linear-gradient(-135deg, #9dceff, #acffe7);
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+}
+
+form p {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#submitButton {
+  height: 45px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #022b3a, #1f7a8c);
+}
+
+#submitButton:hover {
+  background: linear-gradient(-135deg, #9DCEFF, #acffe7);
+}
+
+@media (max-width: 584px) {
+  .banner {
+    flex-direction: column;
+    align-items: center;
+  }
+}

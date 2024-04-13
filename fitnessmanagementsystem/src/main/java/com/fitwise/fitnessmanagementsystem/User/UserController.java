@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.util.*;
 
+import com.fitwise.fitnessmanagementsystem.DietPlan.*;
+
 
 @Controller
 // @RequestMapping(path = "/user")
@@ -23,9 +25,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private DietPlanRepository dietPlanRepository;
+
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+
 
     @GetMapping(path="/user/all")
     public @ResponseBody Iterable<User> getAllUsers() {
@@ -129,7 +135,50 @@ public class UserController {
         request.getSession().setAttribute("loggedInUser", updatedUser);
         return "redirect:/user/home";
     }
+    @GetMapping("/user/selectdietplan")
+    public String getSelectDietPlan(Model model) 
+    {
+        List<DietPlan> dietPlans = dietPlanRepository.findAll(); 
+        model.addAttribute("dietplans", dietPlans);
+        return "select_diet_plan"; 
+    }
+
+    @PostMapping("/user/selectdietplan")
+    public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
+                                        HttpServletRequest request, HttpSession session)
+    {  
+                                         
+
+        User currentUser = (User) session.getAttribute("loggedInUser");
+        if (currentUser == null) 
+        {
+        return "redirect:/user/login";
+        }
+
+        if (selectedDietPlanId != null) 
+        {
+            
+        List<DietPlan> selectedPlans = dietPlanRepository.findByplanId(selectedDietPlanId);
+        DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
+        if (selectedDietPlan != null) 
+        {
+            currentUser.setPlanId(selectedDietPlanId);
+            currentUser.setPlanName(selectedDietPlan.getPlanName());
+            userRepository.save(currentUser);
+            return "redirect:/success"; 
+        }
+        else {
+            // Handle case where no diet plan found with the ID
+            return "redirect:/selectdietplan?error=noPlan"; // Example return for error
+          }
+ 
+    }
+    return "redirect:/selectdietplan"; 
     
+    
+
+    }
+
     
 
 }

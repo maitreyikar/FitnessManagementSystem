@@ -1,0 +1,175 @@
+/*
+colours:
+  Gunmetal (dark blue): #022b3a 
+  Teal (dark greenish blue):  #1f7a8c
+  Light Sky Blue: #9dceff
+  Aquamarine (Light Mint): #acffe7
+  Grey: #e6e6e6
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  overflow-y: scroll;
+  height: 130vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #9DCEFF, #acffe7);
+}
+
+.banner {
+  position: fixed; /* Fixed position to keep it at the top */
+  top: 0;
+  background-color: #022b3a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 20px 40px;
+  z-index: 1;
+}
+
+.site_name {
+  color: #fff;
+  font-size: 4ch;
+}
+
+.container {
+  top: 120px;
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.container .title {
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+
+.container .title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #9DCEFF, #acffe7);
+}
+
+.content form .input-box {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+
+.content form .input-box span.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.content form .input-box input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.content form .input-box input:focus,
+.content form .input-box input:valid {
+  border-color: #acffe7;
+}
+
+.add-button button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #022b3a, #1f7a8c);
+  text-decoration: none;
+}
+
+.add-button button:hover {
+  background: linear-gradient(-135deg, #9DCEFF, #acffe7);
+}
+
+.content form .button {
+  height: 45px;
+  margin: 35px 0;
+}
+
+.content form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #022b3a, #1f7a8c);
+}
+
+
+.button-container {
+    display: flex;
+    align-items: center; /* Adjusted alignment */
+}
+
+.button1,
+.button2 {
+    height: 45px;
+    margin-left: 10px;
+}
+
+.button1 a,
+.button2 a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #022b3a, #1f7a8c);
+    text-decoration: none;
+}
+
+.button1 a:hover,
+.button2 a:hover {
+    background: linear-gradient(-135deg, #9dceff, #acffe7);
+}

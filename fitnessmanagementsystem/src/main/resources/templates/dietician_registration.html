@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Responsive Registration Form</title>
+        <link th:href="@{/style/dietician_registration.css}" rel="stylesheet"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="banner">
+            <div class="site_name">FitWise</div>
+        </div>
+        <div class="container">
+            <div class="title">Dietician Registration</div>
+            <p th:text="${message}"></p>
+            <div class="content">
+                <!-- Form submission -->
+                <form id="myForm" action="#" th:action="@{/dietician/add}" th:object="${dietician}" method="POST">
+                    <div class="dietician-details">
+                        <div class="input-box">
+                            <span class="details">Name</span>
+                            <input id ="name" th:field="*{dieticianName}" type="text" placeholder="Enter your name" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input id ="email" th:field="*{dieticianEmail}" type="text" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Password</span>
+                            <input id ="password" th:field="*{dieticianPassword}" type="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Confirm Password</span>
+                            <input id ="confirmPassword" type="password" placeholder="Confirm your password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input id ="phone" th:field="*{dieticianPhone}" type="number" placeholder="Enter your number" required>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="button">
+                        <input type="submit" value="Register">
+                    </div>
+                </form>
+
+                
+            </div>
+        </div>
+
+
+        <script>
+
+            function validateForm() {
+                var name = document.getElementById("name").value.trim();
+                var email = document.getElementById("email").value.trim();
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirmPassword").value;
+                var phone = document.getElementById("phone").value.trim();
+                
+
+                if (!isValidEmail(email)) {
+                    alert("Please enter a valid email address.");
+                    return false;
+                }
+
+                // Check if passwords match
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match!");
+                    return false;
+                }
+
+                // Check password strength (at least 8 characters)
+                if (password.length < 8) {
+                    alert("Password must be at least 8 characters long.");
+                    return false;
+                }
+
+               if (!isValidPhone(phone)) {
+                    alert("Please enter a valid phone number.");
+                    return false;
+                }
+
+                return true; // Submit the form if all validations pass
+            }
+
+            function isValidEmail(email) {
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            }
+
+            function isValidPhone(phone) {
+                var phonePattern = /^\d{10}$/;
+                return phonePattern.test(phone);
+            }
+
+            document.getElementById("myForm").onsubmit = validateForm;
+
+        </script>>
+    
+    </body>
+</html>

@@ -4,10 +4,12 @@ package com.fitwise.fitnessmanagementsystem.Dietician;
 import org.springframework.data.annotation.Id;
 import  org.springframework.data.mongodb.core.index.Indexed;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "dietician")
 public class Dietician {
     @Id
     private Integer dieticianId;
@@ -17,7 +19,7 @@ public class Dietician {
     private String dieticianEmail;
     private String dieticianPassword;  
     private Long dieticianPhone;
-    private String dieticianSpecialisation;
+    // private String dieticianSpecialisation;
 
 }
 
