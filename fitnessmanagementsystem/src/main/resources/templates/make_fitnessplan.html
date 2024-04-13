@@ -26,7 +26,7 @@
                 </div>
 
                 <div id="exerciseFields">
-                    <!-- Dynamic exercise fields will be added here -->
+                     Dynamic exercise fields will be added here 
                     <div th:each="exercise, exerciseStat : ${fitnessplan.exerciseSet}" class="input-box">
                         <span class="details">Exercise Name</span>
                         <input th:field="*{exerciseSet[__${exerciseStat.index}__].exerciseName}" type="text" placeholder="Enter exercise name">
@@ -38,6 +38,34 @@
                         <input th:field="*{exerciseSet[__${exerciseStat.index}__].sets}" type="number" placeholder="Enter no. of sets">
                     </div>
                 </div>
+
+                <!-- <div id="exerciseFields"> -->
+                    <!-- Subsequent sets of exercise fields (generated inside th:each block) -->
+                    <!-- <div th:each="exercise, exerciseStat : ${fitnessplan.exerciseSet}" class="input-box"> -->
+                        <!-- <span class="details">Exercise Name</span>
+                        <input th:field="*{exerciseSet[__${exerciseStat.index}__].exerciseName}" type="text" placeholder="Enter exercise name">
+                        <span class="details">Duration</span>
+                        <input th:field="*{exerciseSet[__${exerciseStat.index}__].duration}" type="number" placeholder="Enter exercise duration">
+                        <span class="details">Reps</span>
+                        <input th:field="*{exerciseSet[__${exerciseStat.index}__].reps}" type="number" placeholder="Enter no. of reps">
+                        <span class="details">Sets</span>
+                        <input th:field="*{exerciseSet[__${exerciseStat.index}__].sets}" type="number" placeholder="Enter no. of sets"> -->
+                    <!-- </div> -->
+                    <!-- Initial set of exercise fields (generated only if exerciseSet is empty) -->
+                    <!-- <div th:if="${#lists.isEmpty(fitnessplan.exerciseSet)}" class="input-box"> -->
+                        <!-- <span class="details">Exercise Name</span>
+                        <input th:field="*{exerciseSet[__${0}__].exerciseName}" type="text" placeholder="Enter exercise name">
+                        <span class="details">Duration</span>
+                        <input th:field="*{exerciseSet[__${0}__].duration}" type="number" placeholder="Enter exercise duration">
+                        <span class="details">Reps</span>
+                        <input th:field="*{exerciseSet[__${0}__].reps}" type="number" placeholder="Enter no. of reps">
+                        <span class="details">Sets</span>
+                        <input th:field="*{exerciseSet[__${0}__].sets}" type="number" placeholder="Enter no. of sets">
+                    </div>
+                    
+                </div> -->
+                
+                
 
                 <div class="add-button">
                     <button type="button" onclick="addExercise()">Add Exercise</button>
@@ -56,6 +84,7 @@
                 <input type="submit" value="Make fitness plan">
             </div>
         </form>
+
     </div>
 </div>
 
@@ -84,7 +113,7 @@
                 <input name="sets" type="number" placeholder="Enter no. of sets">
             </div><br>
         `;
-
+        
         exerciseFields.appendChild(exerciseDiv);
         exerciseCounter++;
     }

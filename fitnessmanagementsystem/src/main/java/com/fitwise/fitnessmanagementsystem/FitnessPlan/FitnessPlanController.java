@@ -117,11 +117,15 @@ public class FitnessPlanController {
         List<FitnessPlan.Exercise> exerciseList = new ArrayList<>();
         for (int i = 0; i < exerciseNames.size(); i++) {
             FitnessPlan.Exercise exercise = new FitnessPlan.Exercise();
-            exercise.setExerciseName(exerciseNames.get(i));
-            exercise.setDuration(durations.get(i));
-            exercise.setReps(reps.get(i));
-            exercise.setSets(sets.get(i));
-            exerciseList.add(exercise);
+            String check = exerciseNames.get(i);
+            if (check!="") {
+                exercise.setExerciseName(exerciseNames.get(i));
+                exercise.setDuration(durations.get(i));
+                exercise.setReps(reps.get(i));
+                exercise.setSets(sets.get(i));
+                exerciseList.add(exercise);
+            };
+            
         }
 
         fitnessPlan.setExerciseSet(exerciseList);
