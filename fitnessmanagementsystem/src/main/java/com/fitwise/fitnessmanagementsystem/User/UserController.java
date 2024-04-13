@@ -18,7 +18,7 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping(path = "/user")
+// @RequestMapping(path = "/user")
 
 public class UserController {
     @Autowired
@@ -28,21 +28,27 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/user/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+    
 
-    @GetMapping(path = "/register")
+    @GetMapping(path = "/user/register")
     public String getRegistrationPage(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("message", "");
         return "user_registration";
     }
 
+    @GetMapping(path = "/main_home")
+    public String main_home_page(Model model) {
+        return "main_home";
+    }
+
     
-    @PostMapping("/add")
+    @PostMapping("/user/add")
     public String addNewUser(@ModelAttribute("user") User user, Model model) {
         // System.out.println("User details:");
         // System.out.println("gender: " + user.getUserGender());
@@ -68,13 +74,13 @@ public class UserController {
         return "redirect:/user/login";
     }
 
-    @GetMapping(path = "/login")
+    @GetMapping(path = "/user/login")
     public String getLoginPage(Model model) {
         model.addAttribute("message", "");
         return "user_login";
     }
     
-    @PostMapping(path = "/login")
+    @PostMapping(path = "/user/login")
     public String validateUser(Model model, @RequestParam("email") String enteredEmail, @RequestParam("password") String enteredPassword, HttpServletRequest request){
         
         List<User> existingUsers = userRepository.findByUserEmail(enteredEmail);
@@ -90,7 +96,7 @@ public class UserController {
         return "user_login";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/user/home")
     public String userHomePage(Model model, HttpServletRequest request) {
         
         User currentuser = (User)request.getSession().getAttribute("loggedInUser");
@@ -102,7 +108,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/updateUserInfo")
+    @GetMapping("/user/updateUserInfo")
     public String showUpdateUserInfoForm(Model model, HttpServletRequest request) {
         User currentUser = (User) request.getSession().getAttribute("loggedInUser");
         if (currentUser == null) {
@@ -123,7 +129,7 @@ public class UserController {
     }
     
 
-    @PostMapping("/updateUser")
+    @PostMapping("/user/updateUser")
     public String updateUser(@ModelAttribute("user") User updatedUser, Model model, HttpServletRequest request) {
         User currentUser = (User) request.getSession().getAttribute("loggedInUser");
         if (currentUser == null) {

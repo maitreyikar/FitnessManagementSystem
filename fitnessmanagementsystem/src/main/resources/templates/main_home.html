@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title> Home </title>
-    <link rel="stylesheet" th:href="@{/style/user_home.css}">
+    <link rel="stylesheet" th:href="@{/style/main_home.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -11,10 +11,7 @@
     <div class="site_name">FitWise</div>
     <div class="button-container">
         <div class="button1">
-            <a th:href="@{/user/updateUserInfo}">Update Profile</a>
-        </div>
-        <div class="button2">
-            <a th:href="@{/main_home}">Logout</a>
+            <a th:href="@{/user/register}">User Register</a>
         </div>
     </div>
 </div>
@@ -22,11 +19,20 @@
     <div class="title">Welcome!</div>
     <div class="button-container">
         <div class="button">
-            <a th:href="@{/home/{type}/{name}/requestAppointment/status/valid(type=${type}, name=${name})}">View Fitness Plan</a>
+            <a th:href="@{/trainer/login}">Trainer Login</a>
         </div>
+    </div>
+    <div class="button-container">
         <div class="button">
-            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">View Diet Plan</a>
+            <a th:href="@{/user/login}">User Login</a>
         </div>
+    </div>
+    <div class="button-container">
+        <div class="button">
+            <a th:href="@{/dietician/login}">dietician Login</a>
+        </div>
+    </div>
+
     </div>
 </div>
 </body>

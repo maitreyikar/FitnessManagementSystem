@@ -43,7 +43,7 @@ public class TrainerController {
         if(existingTrainers.size() == 1 && (existingTrainers.get(0)).getTrainerPassword().equals(enteredPassword)){
             HttpSession session = request.getSession();
             session.setAttribute("loggedInTrainer", existingTrainers.get(0));
-            return "redirect:/trainer/home";
+            return "redirect:/fitnessplan/makeFP";
         }
         model.addAttribute("message", "Invalid email address and/or password");
         return "trainer_login";

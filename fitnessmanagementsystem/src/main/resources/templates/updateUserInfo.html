@@ -1,74 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Responsive Registration Form</title>
-    <link th:href="@{/style/user_registration.css}" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-<div class="banner">
-    <div class="site_name">FitWise</div>
-    <div class="button-container">
-        <div class="button1">
-            <a th:href="@{/user/home}">Home</a>
-        </div>
-        <div class="button2">
-            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="title" style="color: #022b3a;">Update User Info</div>
-    <div class="content">
-        <form action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
-            <div class="user-details">
-                <div class="input-box">
-                    <span class="details">Name:</span>
-                    <input type="text" th:field="*{userName}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Email:</span>
-                    <input type="email" th:field="*{userEmail}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Phone:</span>
-                    <input type="tel" th:field="*{userPhone}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Age:</span>
-                    <input type="number" th:field="*{userAge}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Height:</span>
-                    <input type="number" step="0.01" th:field="*{userHeight}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Weight:</span>
-                    <input type="number" step="0.01" th:field="*{userWeight}" required/>
-                </div>
-                <div class="input-box">
-                    <span class="details">Gender:</span>
-                    <select th:field="*{userGender}">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Unspecified">Unspecified</option>
-                    </select>
-                </div>
-            </div>
-            <div class="button">
-                <input type="submit" value="Update User Info"/>
-            </div>
-        </form>
-    </div>
-</div>
-</body>
-</html> -->
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -85,7 +14,7 @@
             <a th:href="@{/user/home}">Home</a>
         </div>
         <div class="button2">
-            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
+            <a th:href="@{/main_home}">Logout</a>
         </div>
     </div>
 </div>
