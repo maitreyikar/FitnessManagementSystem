@@ -1,8 +1,11 @@
 package com.fitwise.fitnessmanagementsystem.User;
-
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import  org.springframework.data.mongodb.core.index.Indexed;
-import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import com.fitwise.fitnessmanagementsystem.FitnessPlan.FitnessPlan;
+
+
 
 @Data
 @AllArgsConstructor
@@ -20,4 +23,8 @@ public class User {
     private Float userHeight;
     private Float userWeight;
     private Gender userGender;
+
+    @DBRef
+    FitnessPlan planId;
+
 }
