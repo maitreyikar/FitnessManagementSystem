@@ -21,31 +21,41 @@
 <div class="container">
     <div class="title" style="color: #022b3a;">Update User Info</div>
     <div class="content">
-        <form action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
+        <form id = "myForm"  action="#" th:action="@{/user/updateUser}" th:object="${user}" method="post">
             <div class="user-details">
+                
+                <input type="hidden" th:field="*{userId}" th:value="${user.userId}"/>
+                
                 <div class="input-box">
                     <span class="details">Name:</span>
                     <input type="text" th:field="*{userName}" th:value="${user.userName}" required/>
                 </div>
-                <div class="input-box">
-                    <span class="details">Email:</span>
-                    <input type="email" th:field="*{userEmail}" th:value="${user.userEmail}" required/>
-                </div>
+
+                <input type="hidden" th:field="*{userEmail}" th:value="${user.userEmail}"/>
+                
                 <div class="input-box">
                     <span class="details">Phone:</span>
-                    <input type="tel" th:field="*{userPhone}" th:value="${user.userPhone}" required/>
+                    <input id="phone" type="tel" th:field="*{userPhone}" th:value="${user.userPhone}" required/>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password:</span>
+                    <input id="password" type="password" th:field="*{userPassword}" th:value="${user.userPassword}" required/>
+                </div>
+                <div class="input-box">
+                    <span class="details">Confirm Password:</span>
+                    <input id="confirmPassword" type="password" required/>
                 </div>
                 <div class="input-box">
                     <span class="details">Age:</span>
-                    <input type="number" th:field="*{userAge}" th:value="${user.userAge}" required/>
+                    <input id="age" type="number" th:field="*{userAge}" th:value="${user.userAge}" required/>
                 </div>
                 <div class="input-box">
                     <span class="details">Height:</span>
-                    <input type="number" step="0.01" th:field="*{userHeight}" th:value="${user.userHeight}" required/>
+                    <input id="height" type="number" step="0.1" th:field="*{userHeight}" th:value="${user.userHeight}" required/>
                 </div>
                 <div class="input-box">
                     <span class="details">Weight:</span>
-                    <input type="number" step="0.01" th:field="*{userWeight}" th:value="${user.userWeight}" required/>
+                    <input id="weight" type="number" step="0.1" th:field="*{userWeight}" th:value="${user.userWeight}" required/>
                 </div>
                 <div class="input-box">
                     <span class="details">Gender:</span>
@@ -55,12 +65,74 @@
                         <option value="Unspecified" th:selected="${user.userGender == 'Unspecified'}">Unspecified</option>
                     </select>
                 </div>
+
             </div>
             <div class="button">
                 <input type="submit" value="Update User Info"/>
             </div>
+
+
         </form>
     </div>
 </div>
+
+<script>
+
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var phone = document.getElementById("phone").value.trim();
+        var age = document.getElementById("age").value;
+        var height = document.getElementById("height").value;
+        var weight = document.getElementById("weight").value;
+
+        
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return false;
+        }
+
+        // Check password strength (at least 8 characters)
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters long.");
+            return false;
+        }
+
+       if (!isValidPhone(phone)) {
+            alert("Please enter a valid phone number.");
+            return false;
+        }
+
+        if (isNaN(age) || age <= 0) {
+            alert("Please enter a valid age.");
+            return false;
+        }
+
+        if (isNaN(height) || height <= 0) {
+            alert("Please enter a valid height.");
+            return false;
+        }
+
+        if (isNaN(weight) || weight <= 0) {
+            alert("Please enter a valid weight.");
+            return false;
+        }
+
+        return true; // Submit the form if all validations pass
+    }
+
+    function isValidEmail(email) {
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+    }
+
+    function isValidPhone(phone) {
+        var phonePattern = /^\d{10}$/;
+        return phonePattern.test(phone);
+    }
+
+    document.getElementById("myForm").onsubmit = validateForm;
+
+</script>
 </body>
 </html>

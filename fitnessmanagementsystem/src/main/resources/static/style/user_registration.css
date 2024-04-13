@@ -81,7 +81,7 @@ body{
 
 .button {
   height: 45px;
-  width: calc(50% - 5px);
+  width: 640px;
 }
 
 .button a {

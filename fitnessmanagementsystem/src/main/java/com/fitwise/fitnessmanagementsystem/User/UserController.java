@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -50,9 +49,7 @@ public class UserController {
     
     @PostMapping("/user/add")
     public String addNewUser(@ModelAttribute("user") User user, Model model) {
-        // System.out.println("User details:");
-        // System.out.println("gender: " + user.getUserGender());
-
+        
         List<User> alreadyExistingEmails = userRepository.findByUserEmail(user.getUserEmail());
         if(!alreadyExistingEmails.isEmpty()){
             model.addAttribute("user", user);
@@ -69,6 +66,7 @@ public class UserController {
             Integer newestUserID = (users.get(users.size() - 1)).getUserId();
             user.setUserId(newestUserID + 1);
         }
+
 
         userRepository.save(user);
         return "redirect:/user/login";
@@ -87,7 +85,7 @@ public class UserController {
         // System.out.println(existingUsers.get(0).getUserEmail() +  ", " + existingUsers.get(0).getUserPassword());
         // System.out.println();
 
-        if(existingUsers.size() == 1 && (existingUsers.get(0)).getUserPassword().equals(enteredPassword)){
+        if(!existingUsers.isEmpty() && (existingUsers.get(0)).getUserPassword().equals(enteredPassword)){
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", existingUsers.get(0));
             return "redirect:/user/home";
@@ -113,18 +111,8 @@ public class UserController {
         User currentUser = (User) request.getSession().getAttribute("loggedInUser");
         if (currentUser == null) {
             return "redirect:/user/login";
-        }
-    
-        User user = new User();
-        user.setUserName(currentUser.getUserName());
-        user.setUserEmail(currentUser.getUserEmail());
-        user.setUserPhone(currentUser.getUserPhone());
-        user.setUserAge(currentUser.getUserAge());
-        user.setUserHeight(currentUser.getUserHeight());
-        user.setUserWeight(currentUser.getUserWeight());
-        user.setUserGender(currentUser.getUserGender());
-    
-        model.addAttribute("user", user);
+        }    
+        model.addAttribute("user", currentUser);
         return "updateUserInfo";
     }
     
@@ -135,22 +123,10 @@ public class UserController {
         if (currentUser == null) {
             return "redirect:/user/login";
         }
-        User existingUser = userRepository.findById(currentUser.getUserId()).orElse(null);
-        if (existingUser != null) {
-            // Update user information with the values from the updatedUser object
-            existingUser.setUserName(updatedUser.getUserName());
-            existingUser.setUserEmail(updatedUser.getUserEmail());
-            existingUser.setUserPhone(updatedUser.getUserPhone());
-            existingUser.setUserAge(updatedUser.getUserAge());
-            existingUser.setUserHeight(updatedUser.getUserHeight());
-            existingUser.setUserWeight(updatedUser.getUserWeight());
-            existingUser.setUserGender(updatedUser.getUserGender());
-            userRepository.save(existingUser);
-            User updatedCurrentUser = userRepository.findById(currentUser.getUserId()).orElse(null);
-            if (updatedCurrentUser != null) {
-                request.getSession().setAttribute("loggedInUser", updatedCurrentUser);
-            }
-        }
+    
+        //updatedUser.setUserId(currentUser.getUserId());
+        userRepository.save(updatedUser);
+        request.getSession().setAttribute("loggedInUser", updatedUser);
         return "redirect:/user/home";
     }
     
