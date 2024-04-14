@@ -120,6 +120,12 @@ public class UserController {
         }
     }
 
+    @PostMapping("/home")
+    public String postUserHomePage(Model model, HttpServletRequest request) {
+        // Simply return the HTML page for the user's home
+        return "user_home";
+    }
+
     // @GetMapping("/updateUserInfo")
     // public String showUpdateUserInfoForm(Model model, HttpServletRequest request) {
     //     User currentUser = (User) request.getSession().getAttribute("loggedInUser");
@@ -244,7 +250,7 @@ public class UserController {
         return "select_fitness_plan"; 
     }
 
-    @PostMapping("/user/selectfitnessplan")
+    @PostMapping("/selectfitnessplan")
     public String handleSelectedFitnessPlan(@RequestParam(required = false) String selectedFitnessPlanId,
                                         HttpServletRequest request, HttpSession session)
     {  
@@ -274,7 +280,7 @@ public class UserController {
           }
  
     }
-    return "redirect:/selectfitnessplan"; 
+    return "redirect:/home"; 
     
     
 
