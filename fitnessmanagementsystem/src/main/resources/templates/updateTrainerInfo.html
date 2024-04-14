@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Registration Form</title>
+    <link th:href="@{/style/trainer_registration.css}" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="banner">
+    <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/trainer/home}">Home</a>
+        </div>
+        <div class="button2">
+            <a th:href="@{/home/{type}/{name}/appointmentHistory(type=${type}, name=${name})}">Logout</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="title" style="color: #022b3a;">Update Trainer Info</div>
+    <div class="content">
+        <form action="#" th:action="@{/trainer/updateTrainer}" th:object="${trainer}" method="post">
+            <div class="trainer-details">
+                <div class="input-box">
+                    <span class="details">Name:</span>
+                    <input type="text" th:field="*{trainerName}" th:value="${trainer.trainerName}" required/>
+                </div>
+                <div class="input-box">
+                    <span class="details">Email:</span>
+                    <input type="email" th:field="*{trainerEmail}" th:value="${trainer.trainerEmail}" required/>
+                </div>
+                <div class="input-box">
+                    <span class="details">Phone:</span>
+                    <input type="tel" th:field="*{trainerPhone}" th:value="${trainer.trainerPhone}" required/>
+                </div>
+        
+            </div>
+            <div class="button">
+                <input type="submit" value="Update Trainer Info"/>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

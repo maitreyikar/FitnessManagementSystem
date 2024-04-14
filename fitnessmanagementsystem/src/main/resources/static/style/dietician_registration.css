@@ -1,3 +1,4 @@
+
 /*
 colours:
   Gunmetal (dark blue): #022b3a 
@@ -16,7 +17,7 @@ colours:
 }
 body{
   overflow-y: scroll;
-  /* height: 130vh; */
+  height: 130vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,13 +130,13 @@ body{
   border-radius: 5px;
   background: linear-gradient(135deg, #9DCEFF, #acffe7);
 }
-.content form .user-details{
+.content form .dietician-details{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
-form .user-details .input-box{
+form .dietician-details .input-box{
   margin-bottom: 15px;
   width: calc(100% / 2 - 20px);
 }
@@ -145,7 +146,7 @@ form .input-box span.details{
   font-weight: 500;
   margin-bottom: 5px;
 }
-.user-details .input-box input{
+.dietician-details .input-box input{
   height: 45px;
   width: 100%;
   outline: none;
@@ -156,14 +157,11 @@ form .input-box span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.dietician-details .input-box input:focus,
+.dietician-details .input-box input:valid{
   border-color: #acffe7;
 }
- form .gender-details .gender-title{
-  font-size: 20px;
-  font-weight: 500;
- }
+
  form .category{
    display: flex;
    width: 80%;
@@ -210,25 +208,23 @@ form .input-box span.details{
    transition: all 0.3s ease;
    background: linear-gradient(135deg, #022b3a, #1f7a8c);
  }
- /* form .button input:hover{
-  background: linear-gradient(-135deg, #9DCEFF, #acffe7);
-  } */
+
  @media(max-width: 584px){
  .container{
   max-width: 100%;
 }
-form .user-details .input-box{
+form .dietician-details .input-box{
     margin-bottom: 15px;
     width: 100%;
   }
   form .category{
     width: 100%;
   }
-  .content form .user-details{
+  .content form .dietician-details{
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar{
+  .dietician-details::-webkit-scrollbar{
     width: 5px;
   }
   }
@@ -237,3 +233,7 @@ form .user-details .input-box{
     flex-direction: column;
   }
 }
+
+
+  
+  

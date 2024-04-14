@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Diet Plan</title>
+  <link rel="stylesheet" th:href="@{/style/viewdietplan.css}"/> </head>
+<body>
+<h1>View Diet Plan</h1>
+
+<table class="dietplan-table">
+  <thead>
+    <tr>
+      <th>Dietician Name</th>
+      <th>Diet Plan Name</th>
+      <th>Diet Plan Type</th>
+      <th>Meal Name</th>
+      <th>Description</th>
+      <th>No. of Meals</th>
+      <th>Calorie Goals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="dietplan, stat : ${dietplans}">
+      <td th:text="${dietplan.dieticianName}"></td>
+      <td th:text="${dietplan.planName}"></td>
+      <td th:text="${dietplan.planType}"></td>
+      <td th:each="meal : ${dietplan.mealSet}">
+        <span th:text="${meal.mealName}">Meal Name</span> (
+        <span th:text="${meal.description}">Description</span>,
+        <span th:text="${meal.NoOfMeals}">No. of Meals</span>,
+        <span th:text="${meal.calories}">Calorie Goals</span>)<br/>
+      </td>
+      <td th:text="${dietplan.totalCalories}"></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

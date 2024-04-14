@@ -1,3 +1,4 @@
+
 /*
 colours:
   Gunmetal (dark blue): #022b3a 
@@ -13,100 +14,33 @@ colours:
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
-}
+} 
 body{
   overflow-y: scroll;
-  /* height: 130vh; */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
   background: linear-gradient(135deg, #9DCEFF, #acffe7);
 }
-.banner {
-  position: fixed; /* Fixed position to keep it at the top */
-  top: 0;
+.banner{
+  position: sticky;
+  top: 0px;
   background-color: #022b3a;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   height: 100px;
   padding: 20px 40px;
+  position: fixed;
   z-index: 1;
 }
-
-.site_name {
+.site_name{
   color: #fff;
   font-size: 4ch;
 }
-.button-container {
-  display: flex;
-  align-items: center; /* Adjusted alignment */
-}
-
-.button1,
-.button2 {
-  height: 45px;
-  margin-left: 10px;
-}
-
-.button1 a,
-.button2 a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 0 20px;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #022b3a, #1f7a8c);
-  text-decoration: none;
-}
-
-.button1 a:hover,
-.button2 a:hover {
-  background: linear-gradient(-135deg, #9dceff, #acffe7);
-}
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.button {
-  height: 45px;
-  width: calc(50% - 5px);
-}
-
-.button a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #022b3a, #1f7a8c);
-  text-decoration: none;
-}
-
-.button a:hover {
-  background: linear-gradient(-135deg, #9DCEFF, #acffe7);
-}
-
 .container{
-  top: 120px;
+  top: 100px;
   max-width: 700px;
   width: 100%;
   background-color: #fff;
@@ -127,25 +61,27 @@ body{
   height: 3px;
   width: 30px;
   border-radius: 5px;
+  /* margin-bottom: 20px; */
   background: linear-gradient(135deg, #9DCEFF, #acffe7);
 }
-.content form .user-details{
+.content form .trainer-details{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
-form .user-details .input-box{
+form .trainer-details .input-box{
   margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+  width: 100%;
 }
 
 form .input-box span.details{
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
+  margin-top: 7px;  
 }
-.user-details .input-box input{
+.trainer-details .input-box input{
   height: 45px;
   width: 100%;
   outline: none;
@@ -156,8 +92,8 @@ form .input-box span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.trainer-details .input-box input:focus,
+.trainer-details .input-box input:valid{
   border-color: #acffe7;
 }
  form .gender-details .gender-title{
@@ -217,18 +153,18 @@ form .input-box span.details{
  .container{
   max-width: 100%;
 }
-form .user-details .input-box{
+form .trainer-details .input-box{
     margin-bottom: 15px;
     width: 100%;
   }
   form .category{
     width: 100%;
   }
-  .content form .user-details{
+  .content form .trainer-details{
     max-height: 300px;
     overflow-y: scroll;
   }
-  .user-details::-webkit-scrollbar{
+  .trainer-details::-webkit-scrollbar{
     width: 5px;
   }
   }

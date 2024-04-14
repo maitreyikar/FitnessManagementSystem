@@ -1,0 +1,41 @@
+
+/*
+colours:
+  Gunmetal (dark blue): #022b3a 
+  Teal (dark greenish blue):  #1f7a8c
+  Light Sky Blue: #9dceff
+  Aquamarine (Light Mint): #acffe7
+  Grey: #e6e6e6
+*/
+
+body {
+    background: linear-gradient(135deg, #9DCEFF, #acffe7);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    color: #022b3a;
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    color: #022b3a;
+    font-size: 1.2em;
+  }
+  
+  a {
+    color: #1f7a8c;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

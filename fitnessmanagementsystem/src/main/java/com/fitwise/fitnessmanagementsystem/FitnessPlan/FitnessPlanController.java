@@ -17,6 +17,15 @@ import jakarta.servlet.http.HttpSession;
 import java.util.*;
 
 
+// import static com.mongodb.client.model.Filters.eq;
+// import org.bson.Document;
+// import org.bson.conversions.Bson;
+// import com.mongodb.MongoException;
+// import com.mongodb.client.MongoClient;
+// import com.mongodb.client.MongoClients;
+// import com.mongodb.client.MongoCollection;
+// import com.mongodb.client.MongoDatabase;
+
 // @Controller
 // @RequestMapping(path = "/fitnessplan")
 
@@ -90,6 +99,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fitwise.fitnessmanagementsystem.Trainer.Trainer;
+import com.fitwise.fitnessmanagementsystem.Trainer.TrainerRepository;
+
 @Controller
 @RequestMapping("/fitnessplan")
 public class FitnessPlanController {
@@ -102,13 +114,15 @@ public class FitnessPlanController {
     }
 
     @GetMapping("/makeFP")
-    public String getMakeFPPage(Model model) {
+    public String getMakeFPPage(Model model, @RequestParam("currentTrainer") String currentTrainer) {
         model.addAttribute("fitnessplan", new FitnessPlan());
+        model.addAttribute("currentTrainer", currentTrainer);
         return "make_fitnessplan";
     }
 
     @PostMapping("/saveFitnessPlan")
     public String saveFitnessPlan(@ModelAttribute("fitnessplan") FitnessPlan fitnessPlan,
+                                  @RequestParam("currentTrainer") String currentTrainer,
                                   @RequestParam("exerciseName") List<String> exerciseNames,
                                   @RequestParam("duration") List<Integer> durations,
                                   @RequestParam("reps") List<Integer> reps,
@@ -119,14 +133,21 @@ public class FitnessPlanController {
             FitnessPlan.Exercise exercise = new FitnessPlan.Exercise();
             String check = exerciseNames.get(i);
             if (check!="") {
+                String id = String.valueOf(i);
+                exercise.setExerciseId(id);
                 exercise.setExerciseName(exerciseNames.get(i));
                 exercise.setDuration(durations.get(i));
                 exercise.setReps(reps.get(i));
                 exercise.setSets(sets.get(i));
                 exerciseList.add(exercise);
+                fitnessPlan.setTrainerName(currentTrainer);
             };
             
         }
+
+        long pid = fitnessPlanRepository.count();
+
+        fitnessPlan.setPlanId(String.valueOf(pid));
 
         fitnessPlan.setExerciseSet(exerciseList);
 
@@ -138,5 +159,12 @@ public class FitnessPlanController {
     @GetMapping("/success")
     public String showSuccessPage() {
         return "success";
+    }
+
+    @GetMapping("/viewfitnessplans")
+    public String viewFitnessPlan(Model model){
+        List <FitnessPlan> fitnessPlans=fitnessPlanRepository.findAll();
+        model.addAttribute("fitnessplans", fitnessPlans);
+        return "view_fitness_plans";
     }
 }

@@ -14,7 +14,10 @@
     <div class="title">Create Fitness Plan</div>
     <div class="content">
         <!-- Form submission -->
+        <!-- <form id="myForm" action="/fitnessplan/saveFitnessPlan(currentTrainer=${currentTrainer})" th:action="@{/fitnessplan/saveFitnessPlan(currentTrainer=${currentTrainer})}" th:object="${fitnessplan}" method="POST"> -->
+
         <form id="myForm" action="/fitnessplan/saveFitnessPlan" th:action="@{/fitnessplan/saveFitnessPlan}" th:object="${fitnessplan}" method="POST">
+            <input type="hidden" name="currentTrainer" th:value="${currentTrainer}" />
             <div class="fitnessplan-details">
                 <div class="input-box">
                     <span class="details">Fitness Plan Name</span>
@@ -25,8 +28,17 @@
                     <input id="type" th:field="*{planType}" type="text" placeholder="HIIT/Cardio/Upper Body/etc." required>
                 </div>
 
+                <div class="input-box">
+                    <span class="details">Total Duration</span>
+                    <input id="totalduration" th:field="*{totalDuration}" type="number" placeholder="Enter duration of workout" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Calories Burnt</span>
+                    <input id="caloriesburnt" th:field="*{caloriesBurnt}" type="number" placeholder="Enter calories burnt" required>
+                </div>
+
                 <div id="exerciseFields">
-                     Dynamic exercise fields will be added here 
+                     <!-- Dynamic exercise fields will be added here  -->
                     <div th:each="exercise, exerciseStat : ${fitnessplan.exerciseSet}" class="input-box">
                         <span class="details">Exercise Name</span>
                         <input th:field="*{exerciseSet[__${exerciseStat.index}__].exerciseName}" type="text" placeholder="Enter exercise name">
@@ -70,14 +82,7 @@
                 <div class="add-button">
                     <button type="button" onclick="addExercise()">Add Exercise</button>
                 </div>
-                <div class="input-box">
-                    <span class="details">Total Duration</span>
-                    <input id="totalduration" th:field="*{totalDuration}" type="number" placeholder="Enter duration of workout" required>
-                </div>
-                <div class="input-box">
-                    <span class="details">Calories Burnt</span>
-                    <input id="caloriesburnt" th:field="*{caloriesBurnt}" type="number" placeholder="Enter calories burnt" required>
-                </div>
+                
             </div>
 
             <div class="button">

@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Diet Plan</title>
+</head>
+<body>
+  <h1>Select Diet Plan</h1>
+  <form th:action="@{/selectdietplan}" method="post">
+    <h3>PlanType   Plan Name     Dietician Name  </h3>
+    
+    <p th:each="dietplan, stat : ${dietplans}">
+      <input type="checkbox" th:name="${dietplan.planId}" th:value="${dietplan.planId}">
+      <label th:text="${dietplan.planType} + ' - ' + ${dietplan.planName}+ '-' + ${dietplan.dieticianName}">
+
+    </p>
+    <button type="submit" id="submitButton">Submit Selection</button>
+  </form>
+  <script>
+    const submitButton = document.getElementById('submitButton');
+    const dietPlanForm = document.getElementById('dietPlanForm');
+
+    /*submitButton.addEventListener('click', function(event) {
+      // Prevent default form submission behavior (avoids page refresh)
+      event.preventDefault();
+
+     
+      const popup = document.createElement('div');
+      popup.id = 'submissionPopup';
+      popup.textContent = 'Submission Done!';
+      popup.style.position = 'fixed';
+      popup.style.top = '50%';
+      popup.style.left = '50%';
+      popup.style.transform = 'translate(-50%, -50%)';
+      popup.style.backgroundColor = 'white';
+      popup.style.padding = '20px';
+      popup.style.border = '1px solid black';
+      popup.style.borderRadius = '5px';
+
+      // Add the popup to the body
+      document.body.appendChild(popup);
+
+      // Simulate a short popup display duration (optional)
+      setTimeout(function() {
+        popup.remove();
+      }, 2000); // Remove the popup after 2 seconds
+    });*/
+  
+
+  submitButton.addEventListener('click', function(event) {
+    // Prevent default form submission behavior
+    event.preventDefault();
+
+    // Find the checked checkbox
+    const selectedCheckbox = document.querySelector('input[type="checkbox"]:checked');
+
+    // Check if a checkbox is selected
+    if (selectedCheckbox) {
+      // Get the selected planId from the checkbox value
+      const selectedPlanId = selectedCheckbox.value;
+
+      // Add the selectedPlanId as a hidden form field (optional)
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'selectedPlanId';
+      hiddenInput.value = selectedPlanId;
+      dietPlanForm.appendChild(hiddenInput);
+
+      // Submit the form (this will trigger the UserController.handleSelectedDietPlan method)
+      dietPlanForm.submit();
+    } else {
+      alert('Please select a diet plan');
+    }
+  });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+ 

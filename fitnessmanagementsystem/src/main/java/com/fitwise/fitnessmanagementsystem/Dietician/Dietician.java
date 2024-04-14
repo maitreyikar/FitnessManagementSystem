@@ -10,14 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 public class Dietician {
     @Id
-    private Integer dieticianId;
+    private String dieticianId;
     private String dieticianName;
 
     @Indexed(unique = true)
     private String dieticianEmail;
     private String dieticianPassword;  
     private Long dieticianPhone;
-    private String dieticianSpecialisation;
+    //private String dieticianSpecialisation;
 
 }
 
