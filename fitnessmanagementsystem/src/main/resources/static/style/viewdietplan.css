@@ -105,3 +105,57 @@ form input[type="checkbox"] {
     align-items: center;
   }
 }
+
+
+.dietplan-table {
+  width: 75%;
+  background-color: #fff;
+  border-collapse: collapse;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-top: 20px;
+}
+
+.dietplan-table th,
+.dietplan-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.dietplan-table th {
+  background-color: #022b3a;
+  color: #fff;
+}
+
+.dietplan-table td span {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.dietplan-table td span:last-child {
+  margin-bottom: 0;
+}
+
+/* New CSS for nested table */
+
+.meal-details {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.meal-details td {
+  padding: 8px;
+  border-bottom: 1px solid #e6e6e6;
+  text-align: left;
+}
+
+.meal-details td:first-child {
+  font-weight: bold;
+  color: #022b3a;
+  width: 150px;
+}
+
+.meal-details td:last-child {
+  color: #555;
+}

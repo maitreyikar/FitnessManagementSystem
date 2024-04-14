@@ -136,48 +136,42 @@ public class UserController {
         return "redirect:/user/home";
     }
     @GetMapping("/user/selectdietplan")
-    public String getSelectDietPlan(Model model) 
+    public String getSelectDietPlan(Model model, HttpServletRequest request) 
     {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
         List<DietPlan> dietPlans = dietPlanRepository.findAll(); 
         model.addAttribute("dietplans", dietPlans);
         return "select_diet_plan"; 
     }
 
     @PostMapping("/user/selectdietplan")
-    public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
-                                        HttpServletRequest request, HttpSession session)
-    {  
-                                         
-
+    public String handleSelectedDietPlan(@RequestParam(required = false) Integer selectedDietPlanId,
+                                         HttpServletRequest request, HttpSession session) {  
+    
         User currentUser = (User) session.getAttribute("loggedInUser");
-        if (currentUser == null) 
-        {
-        return "redirect:/user/login";
+        if (currentUser == null) {
+            return "redirect:/user/login";
         }
-
-        if (selectedDietPlanId != null) 
-        {
-            
-        List<DietPlan> selectedPlans = dietPlanRepository.findByplanId(selectedDietPlanId);
-        DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
-        if (selectedDietPlan != null) 
-        {
-            currentUser.setPlanId(selectedDietPlanId);
-            currentUser.setPlanName(selectedDietPlan.getPlanName());
-            userRepository.save(currentUser);
-            return "redirect:/success"; 
+        System.out.println("\n\n\n" + selectedDietPlanId + "\n\n\n");
+        if (selectedDietPlanId != null) {
+            List<DietPlan> selectedPlans = dietPlanRepository.findByPlanId(selectedDietPlanId);
+            DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
+            if (selectedDietPlan != null) {
+                currentUser.setPlanId(selectedDietPlan); // Set the DietPlan object
+                userRepository.save(currentUser);
+                return "redirect:/success"; 
+            } else {
+                // Handle case where no diet plan found with the ID
+                return "redirect:/selectdietplan?error=noPlan"; // Example return for error
+            }
         }
-        else {
-            // Handle case where no diet plan found with the ID
-            return "redirect:/selectdietplan?error=noPlan"; // Example return for error
-          }
- 
+        return "redirect:/user/home"; 
     }
-    return "redirect:/selectdietplan"; 
-    
     
 
-    }
 
     
 

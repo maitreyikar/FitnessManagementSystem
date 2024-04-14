@@ -14,27 +14,27 @@
       </div>
   </div>
 </div>
-  <form id="dietPlanForm" action="/selectdietplan" method="post">
+<form id="dietPlanForm" action="/user/selectdietplan" method="post">
     <table>
-      <thead>
-        <tr>
-          <th>PlanType</th>
-          <th>Plan Name</th>
-          <th>Dietician Name</th>
-          <th>Select</th> <!-- Add a column for selection -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="dietplan, stat : ${dietplans}">
-          <td th:text="${dietplan.planType}"></td>
-          <td th:text="${dietplan.planName}"></td>
-          <td th:text="${dietplan.dieticianName}"></td>
-          <td><input type="checkbox" th:name="${dietplan.planId}" th:value="${dietplan.planId}"></td>
-        </tr>
-      </tbody>
+        <thead>
+            <tr>
+                <th>PlanType</th>
+                <th>Plan Name</th>
+                <th>Dietician Name</th>
+                <th>Select</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dietplan, stat : ${dietplans}">
+                <td th:text="${dietplan.planType}"></td>
+                <td th:text="${dietplan.planName}"></td>
+                <td th:text="${dietplan.dieticianName}"></td>
+                <td><input type="radio" name="selectedDietPlanId" value="${dietplan.planId}"></td>
+            </tr>
+        </tbody>
     </table>
     <button type="submit" id="submitButton">Submit Selection</button>
-  </form>
-  <script src="select_diet_plan.js"></script>
+</form>
+<script src="select_diet_plan.js"></script>
 </body>
 </html>

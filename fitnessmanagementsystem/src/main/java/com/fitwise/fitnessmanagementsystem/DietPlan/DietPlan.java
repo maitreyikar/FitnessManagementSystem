@@ -26,7 +26,7 @@ public class DietPlan {
     }
 
     @Id
-    private String planId;
+    private Integer planId;
     private String planName;
 
     @Indexed(unique=true)

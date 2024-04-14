@@ -48,6 +48,14 @@ public class DietPlanController {
             };
         }
         dietPlan.setMealSet(mealList);
+        List<DietPlan> existingDietPlans = dietPlanRepository.findAll();
+        if(existingDietPlans.isEmpty()) {
+            dietPlan.setPlanId(1);
+        } else {
+            Integer newestPlanId = existingDietPlans.get(existingDietPlans.size() - 1).getPlanId();
+            dietPlan.setPlanId(newestPlanId + 1);
+        }
+        
         dietPlanRepository.save(dietPlan);
         return "redirect:/dietplan/successDP";
     }
