@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +16,24 @@
       </div>
   </div>
 </div>
-<form id="dietPlanForm" action="/user/selectdietplan" method="post">
+<form id="dietPlanForm" action="/user/selectfitnessplan" method="post">
     <table>
         <thead>
             <tr>
                 <th>PlanType</th>
                 <th>Plan Name</th>
-                <th>Dietician Name</th>
+                <th>Duration</th>
                 <th>Select</th>
             </tr>
         </thead>
         <tbody>
             <!-- Assuming dietplans is a model attribute containing a list of diet plans -->
-            <tr th:each="dietplan : ${dietplans}">
-                <td th:text="${dietplan.planType}"></td>
-                <td th:text="${dietplan.planName}"></td>
-                <td th:text="${dietplan.dieticianName}"></td>
+            <tr th:each="fitnessplan : ${fitnessplans}">
+                <td th:text="${fitnessplan.planType}"></td>
+                <td th:text="${fitnessplan.planName}"></td>
+                <td th:text="${fitnessplan.totalDuration}"></td>
                 <!-- Ensure the value attribute is set correctly -->
-                <td><input type="radio" name="selectedDietPlanId" th:value="${dietplan.planId}"></td>
+                <td><input type="radio" name="selectedFitnessPlanId" th:value="${fitnessplan.planId}"></td>
             </tr>
         </tbody>
     </table>

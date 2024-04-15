@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Diet Plan</title>
+  <link rel="stylesheet" th:href="@{/style/viewdietplan.css}"/> </head>
+<body>
+
+<div class="banner">
+  <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/user/home}">Back</a>
+        </div>
+    </div>
+  </div>
+</div>
+<table class="dietplan-table">
+  <thead>
+    <tr>
+      <th>Dietician Name</th>
+      <th>Diet Plan Name</th>
+      <th>Diet Plan Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Total Calories</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="dietplan, stat : ${dietplans}">
+      <td th:text="${dietplan.dieticianName}"></td>
+      <td th:text="${dietplan.planName}"></td>
+      <td th:text="${dietplan.planType}"></td>
+      <td th:each="meal : ${dietplan.mealSet}">
+        <table class="meal-details">
+          <tbody>
+            <tr>
+              <td>Meal Name:</td>
+              <td><span th:text="${meal.mealName}">Meal Name</span></td>
+            </tr>
+            <tr>
+              <td>Description:</td>
+              <td><span th:text="${meal.description}">Description</span></td>
+            </tr>
+            <tr>
+              <td>No. of Meals:</td>
+              <td><span th:text="${meal.NoOfMeals}">No. of Meals</span></td>
+            </tr>
+            <tr>
+              <td>Calorie Goals:</td>
+              <td><span th:text="${meal.calories}">Calorie Goals</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      
+      <td th:text="${dietplan.totalCalories}"></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

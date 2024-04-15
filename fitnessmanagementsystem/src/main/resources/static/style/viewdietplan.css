@@ -1,41 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
-  overflow-y: scroll;
-  height: 130vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: linear-gradient(135deg, #9DCEFF, #acffe7);
+    overflow-y: scroll;
+    height: 130vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #9DCEFF, #acffe7);
 }
 
 .banner {
-  position: fixed;
-  top: 0;
-  background-color: #022b3a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-  padding: 20px 40px;
-  z-index: 1;
+    position: fixed; /* Fixed position to keep it at the top */
+    top: 0;
+    background-color: #022b3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding: 20px 40px;
+    z-index: 1;
 }
 
 .site_name {
-  color: #fff;
-  font-size: 4ch;
+    color: #fff;
+    font-size: 4ch;
 }
 
 .button-container {
   display: flex;
-  align-items: center;
+  align-items: center; /* Adjusted alignment */
 }
 
-.button1 a {
+.button1,
+.button2 {
+  height: 45px;
+  margin-left: 10px;
+}
+
+.button1 a,
+.button2 a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 45px;
+  height: 100%;
   padding: 0 20px;
   border-radius: 5px;
   color: #fff;
@@ -48,114 +64,88 @@ body {
   text-decoration: none;
 }
 
-.button1 a:hover {
+.button1 a:hover,
+.button2 a:hover {
   background: linear-gradient(-135deg, #9dceff, #acffe7);
 }
 
-h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 20px;
+
+#content {
+    max-width: 700px;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 150px; /* Adjusted margin to accommodate fixed banner */
 }
 
-form {
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 20px;
+#content .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
 }
 
-form p {
-  margin-bottom: 15px;
+#content .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #9DCEFF, #acffe7);
 }
-
-form label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-form input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-#submitButton {
-  height: 45px;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #022b3a, #1f7a8c);
-}
-
-#submitButton:hover {
-  background: linear-gradient(-135deg, #9DCEFF, #acffe7);
-}
-
-@media (max-width: 584px) {
-  .banner {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
 
 .dietplan-table {
-  width: 75%;
-  background-color: #fff;
-  border-collapse: collapse;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 20px;
+    width: 75%;
+    background-color: #fff;
+    border-collapse: collapse;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
 }
 
 .dietplan-table th,
 .dietplan-table td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #e6e6e6;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .dietplan-table th {
-  background-color: #022b3a;
-  color: #fff;
+    background-color: #022b3a;
+    color: #fff;
 }
 
 .dietplan-table td span {
-  display: block;
-  margin-bottom: 2px;
+    display: block;
+    margin-bottom: 2px;
 }
 
 .dietplan-table td span:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 /* New CSS for nested table */
 
 .meal-details {
-  width: 100%;
-  border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .meal-details td {
-  padding: 8px;
-  border-bottom: 1px solid #e6e6e6;
-  text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #e6e6e6;
+    text-align: left;
 }
 
 .meal-details td:first-child {
-  font-weight: bold;
-  color: #022b3a;
-  width: 150px;
+    font-weight: bold;
+    color: #022b3a;
+    width: 150px;
 }
 
 .meal-details td:last-child {
-  color: #555;
+    color: #555;
 }

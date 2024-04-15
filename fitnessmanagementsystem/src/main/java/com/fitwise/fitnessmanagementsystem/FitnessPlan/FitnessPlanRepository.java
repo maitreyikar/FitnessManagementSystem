@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface FitnessPlanRepository extends MongoRepository<FitnessPlan, String>{
     public List<FitnessPlan> findByplanId(String planId);
+    
 }

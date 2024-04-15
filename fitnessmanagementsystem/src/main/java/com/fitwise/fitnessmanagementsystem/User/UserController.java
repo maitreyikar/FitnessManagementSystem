@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.*;
 
 import com.fitwise.fitnessmanagementsystem.DietPlan.*;
+import com.fitwise.fitnessmanagementsystem.FitnessPlan.*;
 
 
 @Controller
@@ -27,6 +28,8 @@ public class UserController {
 
     @Autowired
     private DietPlanRepository dietPlanRepository;
+    @Autowired
+    private FitnessPlanRepository fitnessPlanRepository;
 
     public UserController(UserRepository userRepository){
         this.userRepository = userRepository;
@@ -148,7 +151,7 @@ public class UserController {
     }
 
     @PostMapping("/user/selectdietplan")
-    public String handleSelectedDietPlan(@RequestParam(required = false) Integer selectedDietPlanId,
+    public String handleSelectedDietPlan(@RequestParam(required = false) String selectedDietPlanId,
                                          HttpServletRequest request, HttpSession session) {  
     
         User currentUser = (User) session.getAttribute("loggedInUser");
@@ -160,9 +163,9 @@ public class UserController {
             List<DietPlan> selectedPlans = dietPlanRepository.findByPlanId(selectedDietPlanId);
             DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
             if (selectedDietPlan != null) {
-                currentUser.setPlanId(selectedDietPlan); // Set the DietPlan object
+                currentUser.setDietplanId(selectedDietPlanId); // Set the DietPlan object
                 userRepository.save(currentUser);
-                return "redirect:/success"; 
+                return "redirect:/user/home"; 
             } else {
                 // Handle case where no diet plan found with the ID
                 return "redirect:/selectdietplan?error=noPlan"; // Example return for error
@@ -171,8 +174,81 @@ public class UserController {
         return "redirect:/user/home"; 
     }
     
+    @GetMapping("/user/selectfitnessplan")
+    public String getSelectFitnessPlan(Model model, HttpServletRequest request) 
+    {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+        List<FitnessPlan> fitnessPlans = fitnessPlanRepository.findAll(); 
+        model.addAttribute("fitnessplans", fitnessPlans);
+        return "select_fitness_plan"; 
+    }
+
+    @PostMapping("/user/selectfitnessplan")
+    public String handleSelectedFitnessPlan(@RequestParam(required = false) String selectedFitnessPlanId,
+                                         HttpServletRequest request, HttpSession session) {  
+    
+        User currentUser = (User) session.getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+        System.out.println("\n\n\n" + selectedFitnessPlanId + "\n\n\n");
+        if (selectedFitnessPlanId != null) {
+            List<DietPlan> selectedPlans = dietPlanRepository.findByPlanId(selectedFitnessPlanId);
+            DietPlan selectedDietPlan = selectedPlans.isEmpty() ? null : selectedPlans.get(0);
+            if (selectedDietPlan != null) {
+                currentUser.setFitnessplanId(selectedFitnessPlanId); // Set the DietPlan object
+                userRepository.save(currentUser);
+                return "redirect:/user/home"; 
+            } else {
+                // Handle case where no diet plan found with the ID
+                return "redirect:/selectfitnessplan?error=noPlan"; // Example return for error
+            }
+        }
+        return "redirect:/user/home"; 
+
+    }
+    @GetMapping("/user/viewfitnessplan")
+    public String getViewFitnessPlan(Model model, HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+
+        // Get the fitness plan ID associated with the current user
+        String fitnessPlanId = currentUser.getFitnessplanId();
+
+        // Find all fitness plans with the matching fitnessPlanId
+        List<FitnessPlan> fitnessPlans = fitnessPlanRepository.findByplanId(fitnessPlanId);
+
+        model.addAttribute("fitnessplans", fitnessPlans);
+        return "user_view_fp"; 
+    }
+    @GetMapping("/user/viewdietplan")
+    public String getViewDietPlan(Model model, HttpServletRequest request) {
+        User currentUser = (User) request.getSession().getAttribute("loggedInUser");
+        if (currentUser == null) {
+            return "redirect:/user/login";
+        }
+
+        // Get the fitness plan ID associated with the current user
+        String dietPlanId = currentUser.getDietplanId();
+
+        // Find all fitness plans with the matching fitnessPlanId
+        List<DietPlan> dietPlans = dietPlanRepository.findByPlanId(dietPlanId);
+
+        model.addAttribute("dietplans", dietPlans);
+        return "user_view_dp"; 
+    }
+    
+ }
 
 
     
 
-}
+
+    
+
+

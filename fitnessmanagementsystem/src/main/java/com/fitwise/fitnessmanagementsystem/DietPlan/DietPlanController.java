@@ -36,25 +36,23 @@ public class DietPlanController {
                                   @RequestParam("calories") List<Integer> calories) {
         
         List<DietPlan.Meal> mealList= new ArrayList<>();
-        for (int i=0;i< mealNames.size();i++){
-            DietPlan.Meal meal=new DietPlan.Meal();
-            String check=mealNames.get(i);
-            if (check!=""){
+        for (int i=0; i < mealNames.size(); i++){
+            DietPlan.Meal meal = new DietPlan.Meal();
+            String check = mealNames.get(i);
+            if (!check.isEmpty()) {
                 meal.setMealName(mealNames.get(i));
                 meal.setDescription(descriptions.get(i));
                 meal.setNoOfMeals(noOfMeals.get(i));
                 meal.setCalories(calories.get(i));
                 mealList.add(meal);
-            };
+            }
         }
+
+        long pid = dietPlanRepository.count();
+
+        dietPlan.setPlanId(String.valueOf(pid));
         dietPlan.setMealSet(mealList);
-        List<DietPlan> existingDietPlans = dietPlanRepository.findAll();
-        if(existingDietPlans.isEmpty()) {
-            dietPlan.setPlanId(1);
-        } else {
-            Integer newestPlanId = existingDietPlans.get(existingDietPlans.size() - 1).getPlanId();
-            dietPlan.setPlanId(newestPlanId + 1);
-        }
+        
         
         dietPlanRepository.save(dietPlan);
         return "redirect:/dietplan/successDP";

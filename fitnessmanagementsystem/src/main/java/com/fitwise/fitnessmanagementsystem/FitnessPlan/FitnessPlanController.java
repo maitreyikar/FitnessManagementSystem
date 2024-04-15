@@ -120,8 +120,13 @@ public class FitnessPlanController {
             
         }
 
+        
+        long pid = fitnessPlanRepository.count();
+        fitnessPlan.setPlanId(String.valueOf(pid));
+        fitnessPlanRepository.save(fitnessPlan);
         fitnessPlan.setExerciseSet(exerciseList);
-
+        
+        
         fitnessPlanRepository.save(fitnessPlan);
 
         return "redirect:/fitnessplan/success";
@@ -129,6 +134,12 @@ public class FitnessPlanController {
 
     @GetMapping("/success")
     public String showSuccessPage() {
-        return "success";
+        return "successFP";
+    }
+    @GetMapping("/viewFP")
+    public String getviewFPPage(Model model) {
+        List <FitnessPlan> fitnessPlans=fitnessPlanRepository.findAll();
+        model.addAttribute("fitnessplans", fitnessPlans);
+        return "view_fitness_plans";
     }
 }

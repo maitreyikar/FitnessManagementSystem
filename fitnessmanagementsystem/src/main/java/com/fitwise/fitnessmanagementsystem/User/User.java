@@ -25,9 +25,8 @@ public class User {
     private Float userHeight;
     private Float userWeight;
     private Gender userGender;
-
-    @DBRef
-    private DietPlan planId;
+    private String dietplanId;
+    private String fitnessplanId;
 
 
 }

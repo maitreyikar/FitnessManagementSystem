@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Diet Plan</title>
+  <link rel="stylesheet" th:href="@{/style/viewdietplan.css}"/> </head>
+<body>
+
+<div class="banner">
+  <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/user/home}">Back</a>
+        </div>
+    </div>
+  </div>
+</div>
+<table class="dietplan-table">
+  <thead>
+    <tr>
+      <th>Plan Duration</th>
+      <th>Plan Name</th>
+      <th>Plan Type</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Calories Lost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="fitnessplan, stat : ${fitnessplans}">
+      <td th:text="${fitnessplan.totalDuration}"></td>
+      <td th:text="${fitnessplan.planName}"></td>
+      <td th:text="${fitnessplan.planType}"></td>
+      <td th:each="exercise : ${fitnessplan.exerciseSet}">
+        <table class="exercise-details">
+          <tbody>
+            <tr>
+              <td>Exercise:</td>
+              <td><span th:text="${exercise.exerciseName}">Exercise Name</span></td>
+            </tr>
+            <tr>
+              <td>Durations:</td>
+              <td><span th:text="${exercise.Duration}">Duration</span></td>
+            </tr>
+            <tr>
+              <td>Total Sets:</td>
+              <td><span th:text="${exercise.Sets}">Total Sets</span></td>
+            </tr>
+            <tr>
+              <td>Total Reps:</td>
+              <td><span th:text="${exercise.Reps}">Total Reps</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      
+      <td th:text="${fitnessplan.caloriesBurnt}"></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

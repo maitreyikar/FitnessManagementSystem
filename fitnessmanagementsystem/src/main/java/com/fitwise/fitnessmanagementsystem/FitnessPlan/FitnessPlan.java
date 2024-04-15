@@ -30,7 +30,7 @@ public class FitnessPlan {
     }
 
     @Id
-    private Integer fitnessplanId;
+    private String planId;
     private String planName;
 
     @Indexed(unique = true)

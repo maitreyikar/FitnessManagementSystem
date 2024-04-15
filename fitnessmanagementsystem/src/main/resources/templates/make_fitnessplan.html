@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Responsive Registration Form</title>
-    <link th:href="@{/style/make_fitnessplan.css}" rel="stylesheet"/>
+    <link th:href="@{/style/make_dietplan.css}" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <div class="banner">
     <div class="site_name">FitWise</div>
+    <div class="button-container">
+        <div class="button1">
+            <a th:href="@{/trainer/home}">Back</a>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="title">Create Fitness Plan</div>
@@ -26,7 +31,6 @@
                 </div>
 
                 <div id="exerciseFields">
-                     Dynamic exercise fields will be added here 
                     <div th:each="exercise, exerciseStat : ${fitnessplan.exerciseSet}" class="input-box">
                         <span class="details">Exercise Name</span>
                         <input th:field="*{exerciseSet[__${exerciseStat.index}__].exerciseName}" type="text" placeholder="Enter exercise name">
