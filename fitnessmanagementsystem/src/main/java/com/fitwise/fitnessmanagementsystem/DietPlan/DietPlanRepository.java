@@ -1,4 +1,5 @@
 package com.fitwise.fitnessmanagementsystem.DietPlan;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 

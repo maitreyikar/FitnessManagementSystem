@@ -81,19 +81,20 @@ public class DieticianController {
             return "redirect:/dietician/home";
         }
         model.addAttribute("message", "Invalid email address and/or password");
-        return "dietician_home";
+        return "dietician_login";
     }
 
     @GetMapping("/home")
     public String dieticianHomePage(Model model, HttpServletRequest request) {
         
-        Dietician currentdietician = (Dietician)request.getSession().getAttribute("loggedInDietician");
-        if(currentdietician == null){
-            return "redirect:/dietician/login";
-        }
-        else{
-            return "dietician_home";
-        }
+        // Dietician currentdietician = (Dietician)request.getSession().getAttribute("loggedInDietician");
+        // if(currentdietician == null){
+        //     return "redirect:/dietician/login";
+        // }
+        // else{
+        //     return "dietician_home";
+        // }
+        return "dietician_home";
     }
 
 

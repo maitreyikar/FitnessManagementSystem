@@ -25,14 +25,16 @@ import com.fitwise.fitnessmanagementsystem.FitnessPlan.*;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private DietPlanRepository dietPlanRepository;
     @Autowired
     private FitnessPlanRepository fitnessPlanRepository;
 
-    public UserController(UserRepository userRepository){
+    public UserController(UserRepository userRepository,DietPlanRepository dietPlanRepository, FitnessPlanRepository fitnessPlanRepository)
+    {
         this.userRepository = userRepository;
+        this.dietPlanRepository=dietPlanRepository;
+        this.fitnessPlanRepository = fitnessPlanRepository;
     }
 
 

@@ -10,14 +10,14 @@ import lombok.*;
 @NoArgsConstructor
 public class Trainer {
     @Id
-    private Integer trainerId;
-    private String trainerName;
+    private String trainerId;
+    public String trainerName;
 
     @Indexed(unique = true)
     private String trainerEmail;
     private String trainerPassword;  
     private Long trainerPhone;
-    private String trainerSpecialisation;
+    //private String trainerSpecialisation;
 
 }
 

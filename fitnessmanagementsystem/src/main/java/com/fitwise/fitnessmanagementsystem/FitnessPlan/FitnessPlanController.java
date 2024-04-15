@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
+import java.util.*;
 
 
 // @Controller
@@ -78,9 +82,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 // }
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fitwise.fitnessmanagementsystem.Trainer.Trainer;
+import com.fitwise.fitnessmanagementsystem.Trainer.TrainerRepository;
 
 @Controller
 @RequestMapping("/fitnessplan")
@@ -94,13 +105,15 @@ public class FitnessPlanController {
     }
 
     @GetMapping("/makeFP")
-    public String getMakeFPPage(Model model) {
+    public String getMakeFPPage(Model model, @RequestParam("currentTrainer") String currentTrainer) {
         model.addAttribute("fitnessplan", new FitnessPlan());
+        model.addAttribute("currentTrainer", currentTrainer);
         return "make_fitnessplan";
     }
 
     @PostMapping("/saveFitnessPlan")
     public String saveFitnessPlan(@ModelAttribute("fitnessplan") FitnessPlan fitnessPlan,
+                                  @RequestParam("currentTrainer") String currentTrainer,
                                   @RequestParam("exerciseName") List<String> exerciseNames,
                                   @RequestParam("duration") List<Integer> durations,
                                   @RequestParam("reps") List<Integer> reps,
@@ -111,32 +124,35 @@ public class FitnessPlanController {
             FitnessPlan.Exercise exercise = new FitnessPlan.Exercise();
             String check = exerciseNames.get(i);
             if (check!="") {
+                String id = String.valueOf(i);
+                exercise.setExerciseId(id);
                 exercise.setExerciseName(exerciseNames.get(i));
                 exercise.setDuration(durations.get(i));
                 exercise.setReps(reps.get(i));
                 exercise.setSets(sets.get(i));
                 exerciseList.add(exercise);
+                fitnessPlan.setTrainerName(currentTrainer);
             };
             
         }
+            long pid = fitnessPlanRepository.count();
 
-        
-        long pid = fitnessPlanRepository.count();
-        fitnessPlan.setPlanId(String.valueOf(pid));
-        fitnessPlanRepository.save(fitnessPlan);
-        fitnessPlan.setExerciseSet(exerciseList);
-        
-        
-        fitnessPlanRepository.save(fitnessPlan);
+            fitnessPlan.setPlanId(String.valueOf(pid));
 
-        return "redirect:/fitnessplan/success";
-    }
+            fitnessPlan.setExerciseSet(exerciseList);
+
+            fitnessPlanRepository.save(fitnessPlan);
+
+            return "redirect:/fitnessplan/success";
+        }
+            
+    
 
     @GetMapping("/success")
     public String showSuccessPage() {
         return "successFP";
     }
-    @GetMapping("/viewFP")
+    @GetMapping("/viewfitnessplans")
     public String getviewFPPage(Model model) {
         List <FitnessPlan> fitnessPlans=fitnessPlanRepository.findAll();
         model.addAttribute("fitnessplans", fitnessPlans);

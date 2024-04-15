@@ -22,7 +22,7 @@
             <tr>
                 <th>PlanType</th>
                 <th>Plan Name</th>
-                <th>Duration</th>
+                <th>Trainer Name</th>
                 <th>Select</th>
             </tr>
         </thead>
@@ -31,7 +31,7 @@
             <tr th:each="fitnessplan : ${fitnessplans}">
                 <td th:text="${fitnessplan.planType}"></td>
                 <td th:text="${fitnessplan.planName}"></td>
-                <td th:text="${fitnessplan.totalDuration}"></td>
+                <td th:text="${fitnessplan.trainerName}"></td>
                 <!-- Ensure the value attribute is set correctly -->
                 <td><input type="radio" name="selectedFitnessPlanId" th:value="${fitnessplan.planId}"></td>
             </tr>

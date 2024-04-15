@@ -42,6 +42,7 @@ public class FitnessPlan {
     private List<FitnessPlan.Exercise> exerciseSet;
     private Integer totalDuration;
     private Integer caloriesBurnt;
+    private String trainerName;
    
 }
 

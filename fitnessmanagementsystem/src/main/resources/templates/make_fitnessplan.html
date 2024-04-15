@@ -20,6 +20,7 @@
     <div class="content">
         <!-- Form submission -->
         <form id="myForm" action="/fitnessplan/saveFitnessPlan" th:action="@{/fitnessplan/saveFitnessPlan}" th:object="${fitnessplan}" method="POST">
+            <input type="hidden" name="currentTrainer" th:value="${currentTrainer}" />
             <div class="fitnessplan-details">
                 <div class="input-box">
                     <span class="details">Fitness Plan Name</span>

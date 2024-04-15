@@ -24,9 +24,49 @@ import java.util.*;
 public class TrainerController {
     @Autowired
     private TrainerRepository trainerRepository;
+    private HttpSession session;
 
     public TrainerController(TrainerRepository trainerRepository){
         this.trainerRepository = trainerRepository;
+    }
+
+    @GetMapping(path = "/register")
+    public String getRegistrationPage(Model model) {
+        model.addAttribute("trainer", new Trainer());
+        model.addAttribute("message", "");
+        return "trainer_registration";
+    }
+
+    
+    @PostMapping("/add")
+    public String addNewTrainer(@ModelAttribute("trainer") Trainer trainer, Model model) {
+        // System.out.println("User details:");
+        // System.out.println("gender: " + user.getUserGender());
+
+        List<Trainer> alreadyExistingEmails = trainerRepository.findByTrainerEmail(trainer.getTrainerEmail());
+        if(!alreadyExistingEmails.isEmpty()){
+            model.addAttribute("trainer", trainer);
+            model.addAttribute("message", "An account linked to this email address already exists!");
+            //return "trainer_registration";
+            return "redirect:/trainer/login";
+        }
+
+        // List<Trainer> trainers= trainerRepository.findAll();
+
+        // if(trainers.isEmpty()){
+        //     trainer.setTrainerId(1);
+        // }
+        // else{
+        //     Integer newestTrainerID = (trainers.get(trainers.size() - 1)).getTrainerId();
+        //     trainer.setTrainerId(newestTrainerID + 1);
+        // }
+
+        long pid = trainerRepository.count();
+
+        trainer.setTrainerId(String.valueOf(pid));
+
+        trainerRepository.save(trainer);
+        return "redirect:/trainer/login";
     }
 
     @GetMapping(path = "/login")
@@ -48,20 +88,57 @@ public class TrainerController {
         model.addAttribute("message", "Invalid email address and/or password");
         return "trainer_login";
     }
-    @GetMapping(path = "/logout")
-    public String trainerLogout(Model model) {
-        model.addAttribute("message", "");
-        return "main_home";
-    }
-    @GetMapping(path = "/home")
-    public String trainerhome(Model model, HttpServletRequest request){
 
-        Trainer currentuser = (Trainer)request.getSession().getAttribute("loggedInTrainer");
-        if(currentuser == null){
+    @GetMapping("/home")
+    public String trainerHomePage(Model model, HttpServletRequest request) {
+        
+        Trainer currenttrainer = (Trainer)request.getSession().getAttribute("loggedInTrainer");
+        if(currenttrainer == null){
             return "redirect:/trainer/login";
         }
-        return "trainer_home";
-    }
+        else{
+            model.addAttribute("currentTrainer", currenttrainer);
+            return "trainer_home";
+        }
+    }   
 
+    @GetMapping("/updateTrainerInfo")
+    public String showUpdateTrainerrInfoForm(Model model, HttpServletRequest request) {
+        Trainer currentTrainer = (Trainer) request.getSession().getAttribute("loggedInTrainer");
+        if (currentTrainer == null) {
+            return "redirect:/trainer/login";
+        }
+    
+        Trainer trainer = new Trainer();
+        trainer.setTrainerName(currentTrainer.getTrainerName());
+        trainer.setTrainerEmail(currentTrainer.getTrainerEmail());
+        trainer.setTrainerPhone(currentTrainer.getTrainerPhone());
+    
+        model.addAttribute("trainer", trainer);
+        return "updateTrainerInfo";
+    }
+    
+
+    @PostMapping("/updateTrainer")
+    public String updateTrainer(@ModelAttribute("trainer") Trainer updatedTrainer, Model model, HttpServletRequest request) {
+        Trainer currentTrainer = (Trainer) request.getSession().getAttribute("loggedInTrainer");
+        if (currentTrainer == null) {
+            return "redirect:/trainer/login";
+        }
+        Trainer existingTrainer = trainerRepository.findByTrainerId(currentTrainer.getTrainerId());
+        if (existingTrainer != null) {
+            // Update Trainer information with the values from the updatedTrainer object
+            existingTrainer.setTrainerName(updatedTrainer.getTrainerName());
+            existingTrainer.setTrainerEmail(updatedTrainer.getTrainerEmail());
+            existingTrainer.setTrainerPhone(updatedTrainer.getTrainerPhone());
+
+            trainerRepository.save(existingTrainer);
+            Trainer updatedCurrentTrainer = trainerRepository.findByTrainerId(currentTrainer.getTrainerId());
+            if (updatedCurrentTrainer != null) {
+                request.getSession().setAttribute("loggedInTrainer", updatedCurrentTrainer);
+            }
+        }
+        return "redirect:/trainer/home";
+    }
 
 }
